@@ -1,0 +1,132 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="progressBar" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="cardView_auth" parent="CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardBackgroundColor">@color/gray</item>
+        <item name="cardElevation">2dp</item>
+    </style>
+
+    <style name="editText_auth">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textColorHint">@color/red</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:background">@drawable/sh_et_bg</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="btn_white">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:background">@drawable/sh_white_btn</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <style name="btn_red">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:background">@drawable/sh_red_btn</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <style name="tab_style" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="bottom_style" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="donation_tv">
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="details_tv">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+
+    <style name="st_tv_more">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="st_iv_more">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="st_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="BottomNavigationView">
+        <item name="android:fontFamily">@font/janna</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="check_box_style">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/janna</item>
+    </style>
+</resources>

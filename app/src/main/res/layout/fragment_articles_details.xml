@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/fragment_articles_details_iv_article"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/article_image" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_articles_details_iv_article"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/sh_bottom_sheet"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:id="@+id/fragment_articles_details_iv_favorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignBottom="@id/fragment_articles_details_tv_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_favorite_border" />
+
+        <TextView
+            android:id="@+id/fragment_articles_details_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/janna"
+            android:text="طرق الوقاية من الامراض"
+            android:textColor="@color/red"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/fragment_articles_details_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_articles_details_tv_title"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/janna"
+            android:gravity="center"
+            android:text="من الامراض طرق الوقايه من الامراض طرق الوقايه من الامراضمن الامراض طرق الوقايه من الامراض طرق الوقايه من الامراضطرق الوقايه من الامراض طرق الوقايه من الامراض طرق الوقايه من الامراض طرق الوقايه من الامراض"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</RelativeLayout>

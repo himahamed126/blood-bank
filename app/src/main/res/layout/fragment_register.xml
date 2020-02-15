@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login">
+
+    <TextView
+        android:id="@+id/fragment_register_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/janna"
+        android:gravity="center"
+        android:text="@string/create_new_acc"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_register_tv_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/fragment_register_ed_name"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_person_red"
+                android:hint="@string/name" />
+
+            <EditText
+                android:id="@+id/fragment_register_ed_email"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_mail_red"
+                android:hint="@string/email" />
+
+            <TextView
+                android:id="@+id/fragment_register_tv_birth_date"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_date_red"
+                android:hint="@string/birth_date" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/sh_et_bg"
+                android:layoutDirection="rtl">
+
+                <ImageView
+                    android:id="@+id/fragment_register_sp_blood_type_iv"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/ic_drop_red" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/fragment_register_sp_blood_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/fragment_register_sp_blood_type_iv" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/fragment_register_tv_donation_date"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_date_red"
+                android:hint="@string/chose_donation_date" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/sh_et_bg"
+                android:layoutDirection="rtl">
+
+                <ImageView
+                    android:id="@+id/fragment_register_sp_governorate_iv"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/ic_home_red" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/fragment_register_sp_governorate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/fragment_register_sp_governorate_iv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/sh_et_bg"
+                android:layoutDirection="rtl">
+
+                <ImageView
+                    android:id="@+id/fragment_register_sp_city_iv"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/ic_home_red" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/fragment_register_sp_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/fragment_register_sp_city_iv" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/fragment_register_ed_phone"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_phone_red"
+                android:hint="@string/phone_number" />
+
+            <EditText
+                android:id="@+id/fragment_register_ed_password"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_lock_red"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textAlignment="textEnd" />
+
+            <EditText
+                android:id="@+id/fragment_register_ed_confirm_password"
+                style="@style/editText_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_lock_red"
+                android:hint="@string/confirm_password" />
+
+            <TextView
+                android:id="@+id/fragment_login_btn_login"
+                style="@style/btn_white"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="@string/register" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
