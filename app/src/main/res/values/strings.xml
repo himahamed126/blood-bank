@@ -69,4 +69,5 @@
     <string name="message_text">نص الرسالة</string>
     <string name="save">حفظ</string>
     <string name="governorates">المحافظات</string>
+    <string name="log_out_answer">هل تود الخروج</string>
 </resources>

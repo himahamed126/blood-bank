@@ -28,7 +28,10 @@ import retrofit2.Response;
 
 import static com.example.bloodbank.data.api.ApiClient.getClient;
 import static com.example.bloodbank.data.local.SharedPreferencesManger.API_TOKEN;
+import static com.example.bloodbank.data.local.SharedPreferencesManger.LATITUDE;
+import static com.example.bloodbank.data.local.SharedPreferencesManger.LONGITUDE;
 import static com.example.bloodbank.data.local.SharedPreferencesManger.LoadData;
+import static com.example.bloodbank.data.local.SharedPreferencesManger.SaveData;
 import static com.example.bloodbank.helper.HelperMethods.dismissProgressDialog;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData2;
@@ -46,8 +49,6 @@ public class AddDonationFragment extends BaseFragment {
     EditText fragmentAddDonationEdBloodCount;
     @BindView(R.id.fragment_add_donation_ed_hospital_name)
     EditText fragmentAddDonationEdHospitalName;
-    @BindView(R.id.fragment_add_donation_ed_hospital_address)
-    EditText fragmentAddDonationEdHospitalAddress;
     @BindView(R.id.fragment_add_donation_sp_governorate)
     Spinner fragmentAddDonationSpGovernorate;
     @BindView(R.id.fragment_add_donation_sp_city)
@@ -58,7 +59,6 @@ public class AddDonationFragment extends BaseFragment {
     EditText fragmentAddDonationEdNote;
     @BindView(R.id.fragment_add_donation_tv_hospital_address)
     TextView fragmentAddDonationTvHospitalAddress;
-
 
     private GeneralResponseAdapter bloodTypeAdapter, governorteAdapter, citiesAdapter;
     private String name, age, bagsNum, hospitalName, hospitalAddress, phone, notes, latitude, longitude;
@@ -74,6 +74,18 @@ public class AddDonationFragment extends BaseFragment {
         getBloodType();
         getGovernorate();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        latitude = LoadData(getActivity(), LATITUDE);
+        longitude = LoadData(getActivity(), LONGITUDE);
+        if (latitude != (null) && longitude != (null)) {
+            fragmentAddDonationTvHospitalAddress.setText(latitude + "" + longitude);
+        } else {
+            fragmentAddDonationTvHospitalAddress.setText(getString(R.string.hospital_address));
+        }
     }
 
     private void getBloodType() {
@@ -109,9 +121,8 @@ public class AddDonationFragment extends BaseFragment {
         name = fragmentAddDonationEdName.getText().toString();
         age = fragmentAddDonationEdAge.getText().toString();
         bagsNum = fragmentAddDonationEdBloodCount.getText().toString();
-        hospitalName = fragmentAddDonationEdHospitalAddress.getText().toString();
         hospitalName = fragmentAddDonationEdHospitalName.getText().toString();
-        hospitalAddress = fragmentAddDonationEdHospitalAddress.getText().toString();
+        hospitalAddress = fragmentAddDonationTvHospitalAddress.getText().toString();
         phone = fragmentAddDonationEdPhone.getText().toString();
         notes = fragmentAddDonationEdNote.getText().toString();
         bloodTypeId = fragmentAddDonationSpBloodType.getSelectedItemPosition();
@@ -128,6 +139,8 @@ public class AddDonationFragment extends BaseFragment {
             public void onResponse(Call<Donations> call, Response<Donations> response) {
                 dismissProgressDialog();
                 if (response.body().getStatus() == 1) {
+                    SaveData(getActivity(), LONGITUDE, "");
+                    SaveData(getActivity(), LATITUDE, "");
                     showToast(getActivity(), response.body().getMsg());
                 } else {
                     showToast(getActivity(), response.body().getMsg());
@@ -141,7 +154,6 @@ public class AddDonationFragment extends BaseFragment {
             }
         });
     }
-
 
     @OnClick({R.id.fragment_add_donation_btn_hospital_address, R.id.fragment_add_donation_btn_send})
     public void onViewClicked(View view) {

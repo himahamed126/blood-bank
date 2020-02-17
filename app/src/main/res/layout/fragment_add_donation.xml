@@ -122,15 +122,7 @@
                     android:src="@drawable/ic_search" />
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/fragment_add_donation_ed_hospital_address"
-                style="@style/editText_auth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/sh_et_bg"
-                android:hint="@string/phone"
-                android:layoutDirection="rtl" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"

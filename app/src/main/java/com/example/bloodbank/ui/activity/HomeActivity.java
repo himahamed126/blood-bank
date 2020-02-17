@@ -6,8 +6,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.bloodbank.R;
-import com.example.bloodbank.ui.fragment.homeCycle.AboutAppFragment;
-import com.example.bloodbank.ui.fragment.homeCycle.ContactUsFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.EditProfileFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.HomeFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.MoreFragment;

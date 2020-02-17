@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.example.bloodbank.R;
+import com.example.bloodbank.ui.dialog.LogOutDialog;
 import com.example.bloodbank.ui.fragment.BaseFragment;
 
 import butterknife.ButterKnife;
@@ -45,6 +48,9 @@ public class MoreFragment extends BaseFragment {
                 replace(notificationSettingsFragment, getActivity().getSupportFragmentManager(), R.id.activity_home_fl_content);
                 break;
             case R.id.fragment_more_btn_log_out:
+                FragmentManager fragmentManager = getFragmentManager();
+                LogOutDialog logOutDialog = new LogOutDialog();
+                logOutDialog.show(fragmentManager,"logout");
                 break;
         }
     }
