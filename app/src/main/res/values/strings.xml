@@ -44,6 +44,7 @@
     <string name="age">العمر</string>
     <string name="age_">العمر :</string>
     <string name="blood_type_">فصيلة الدم :</string>
+    <string name="blood_types">فصائل الدم</string>
     <string name="blood_count">عدد الاكياس</string>
     <string name="blood_count_">عدد الاكياس المطلوبة :</string>
     <string name="address">العنوان :</string>
@@ -66,4 +67,6 @@
     <string name="email_">himahamed999@gmail.com</string>
     <string name="message_title">عنوان الرسالة</string>
     <string name="message_text">نص الرسالة</string>
+    <string name="save">حفظ</string>
+    <string name="governorates">المحافظات</string>
 </resources>

@@ -4,9 +4,12 @@ import com.example.bloodbank.data.model.General.GenaralResponse;
 import com.example.bloodbank.data.model.articles.Articles;
 import com.example.bloodbank.data.model.donations.Donations;
 import com.example.bloodbank.data.model.login.Login;
+import com.example.bloodbank.data.model.notificationSettings.NotificationSettings;
 import com.example.bloodbank.data.model.notifications.Notification;
 import com.example.bloodbank.data.model.postToggle.PostToggle;
 import com.example.bloodbank.data.model.restPassword.RestPassword;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -104,4 +107,14 @@ public interface ApiServices {
     @GET("notifications")
     Call<Notification> getNotifications(@Query("api_token") String api_token,
                                         @Query("page") int page);
+
+    @POST("notifications-settings")
+    @FormUrlEncoded
+    Call<NotificationSettings> getNotificationSettings(@Field("api_token") String api_token);
+
+    @POST("notifications-settings")
+    @FormUrlEncoded
+    Call<NotificationSettings> changeNotificationSettings(@Field("api_token") String api_token,
+                                                          @Field("governorates[]") List<Integer> governorates,
+                                                          @Field("blood_types[]") List<Integer> blood_types);
 }

@@ -1,10 +1,12 @@
 package com.example.bloodbank.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bloodbank.R;
 import com.example.bloodbank.data.model.General.GeneralData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,13 +24,15 @@ public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHo
 
     private Context context;
     private List<GeneralData> generalDataList;
+    private List<String> oldList;
+    public List<Integer> newIds = new ArrayList<>();
 
-    private List<Integer> oldList;
-    private List<Integer> newList;
+    private static final String TAG = "CheckBoxAdapter";
 
-    public CheckBoxAdapter(Context context, List list) {
+    public CheckBoxAdapter(Context context, List<GeneralData> generalDataList, List<String> oldList) {
         this.context = context;
-        this.generalDataList = list;
+        this.generalDataList = generalDataList;
+        this.oldList = oldList;
     }
 
     @NonNull
@@ -46,28 +51,34 @@ public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHo
     private void setData(ViewHolder holder, int position) {
         GeneralData data = generalDataList.get(position);
         holder.itemCheckBoxCh.setText(data.getName());
-        if (oldList.contains(data.getId())) {
-            holder.itemCheckBoxCh.setChecked(true);
-        } else {
-            holder.itemCheckBoxCh.setChecked(false);
+        try {
+            if (oldList.contains(String.valueOf(data.getId()))) {
+                holder.itemCheckBoxCh.setChecked(true);
+                newIds.add(data.getId());
+            } else {
+                holder.itemCheckBoxCh.setChecked(false);
+            }
+        } catch (Exception e) {
+            Log.i(TAG, e.getMessage());
         }
+
     }
 
     private void setAction(ViewHolder holder, int position) {
         GeneralData data = generalDataList.get(position);
 
-        holder.itemCheckBoxCh.setOnClickListener(new View.OnClickListener() {
+        holder.itemCheckBoxCh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (holder.itemCheckBoxCh.isChecked()) {
-                    for (int i = 0; i < newList.size(); i++) {
-                        if (newList.get(i).equals(data.getId())) {
-                            newList.remove(i);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (int i = 0; i < newIds.size(); i++) {
+                        if (data.getId().equals(newIds.get(i))) {
+                            newIds.remove(i);
                             break;
                         }
                     }
                 } else {
-                    newList.add(data.getId());
+                    newIds.add(data.getId());
                 }
             }
         });

@@ -41,6 +41,8 @@ public class MoreFragment extends BaseFragment {
             case R.id.fragment_more_btn_rate_on_store:
                 break;
             case R.id.fragment_more_btn_notification_settings:
+                NotificationSettingsFragment notificationSettingsFragment = new NotificationSettingsFragment();
+                replace(notificationSettingsFragment, getActivity().getSupportFragmentManager(), R.id.activity_home_fl_content);
                 break;
             case R.id.fragment_more_btn_log_out:
                 break;

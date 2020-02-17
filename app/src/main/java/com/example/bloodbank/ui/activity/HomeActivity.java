@@ -35,7 +35,7 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         EditProfileFragment editProfileFragment = new EditProfileFragment();
         NotificationSettingsFragment notificationSettingsFragment = new NotificationSettingsFragment();
 
-        replace(notificationSettingsFragment, getSupportFragmentManager(), R.id.activity_home_fl_content);
+        replace(homeFragment, getSupportFragmentManager(), R.id.activity_home_fl_content);
         activityHomeBnBottomNavigation.setOnNavigationItemSelectedListener(this);
     }
 
