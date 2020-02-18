@@ -33,10 +33,12 @@ import static com.example.bloodbank.data.local.SharedPreferencesManger.API_TOKEN
 import static com.example.bloodbank.data.local.SharedPreferencesManger.LoadData;
 import static com.example.bloodbank.data.local.SharedPreferencesManger.PASSWORD;
 import static com.example.bloodbank.data.local.SharedPreferencesManger.SaveData;
+import static com.example.bloodbank.data.local.SharedPreferencesManger.USER_DATA;
 import static com.example.bloodbank.data.local.SharedPreferencesManger.loadUserData;
 import static com.example.bloodbank.helper.HelperMethods.dismissProgressDialog;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData2;
+import static com.example.bloodbank.helper.HelperMethods.showCalender;
 import static com.example.bloodbank.helper.HelperMethods.showProgressDialog;
 import static com.example.bloodbank.helper.HelperMethods.showToast;
 
@@ -76,6 +78,8 @@ public class EditProfileFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         ButterKnife.bind(this, view);
 
+        dateModel = new DateModel("01", "01", "1970", "01-01-1970");
+
         clientData = loadUserData(getActivity());
         executSpinner();
         setData();
@@ -114,19 +118,18 @@ public class EditProfileFragment extends BaseFragment {
         fragmentEditProfileEdPassword.setText(LoadData(getActivity(), PASSWORD));
         fragmentEditProfileEdConfirmPassword.setText(LoadData(getActivity(), PASSWORD));
 
-
     }
 
     private void editProfile() {
-//        name = fragmentRegisterEdName.getText().toString();
-//        email = fragmentRegisterEdEmail.getText().toString();
-//        birth_date = fragmentRegisterTvBirthDate.getText().toString();
-//        phone = fragmentRegisterEdPhone.getText().toString();
-//        donation_last_date = fragmentRegisterTvDonationDate.getText().toString();
-//        password = fragmentRegisterEdPassword.getText().toString();
-//        password_confirmation = fragmentRegisterEdConfirmPassword.getText().toString();
-//        city_id = fragmentRegisterSpCity.getSelectedItemPosition();
-//        blood_type_id = fragmentRegisterSpBloodType.getSelectedItemPosition();
+        name = fragmentEditProfileEdName.getText().toString();
+        email = fragmentEditProfileEdEmail.getText().toString();
+        birth_date = fragmentEditProfileTvBirthDate.getText().toString();
+        phone = fragmentEditProfileEdPhone.getText().toString();
+        donation_last_date = fragmentEditProfileTvDonationDate.getText().toString();
+        password = fragmentEditProfileEdPassword.getText().toString();
+        password_confirmation = fragmentEditProfileEdConfirmPassword.getText().toString();
+        city_id = fragmentEditProfileSpCity.getSelectedItemPosition();
+        blood_type_id = fragmentEditProfileSpBloodType.getSelectedItemPosition();
 
         showProgressDialog(getActivity(), getString(R.string.please_wait));
         getClient().signup(name, email, birth_date, city_id, phone, donation_last_date,
@@ -138,6 +141,8 @@ public class EditProfileFragment extends BaseFragment {
                     if (response.body().getStatus() == 1) {
                         showToast(getActivity(), response.body().getMsg());
                         SaveData(getActivity(), API_TOKEN, response.body().getData().getApiToken());
+                        SaveData(getActivity(),USER_DATA,response.body().getData().getClient());
+                        SaveData(getActivity(),PASSWORD,password);
                         startActivity(new Intent(getActivity(), HomeActivity.class));
                     } else {
                         showToast(getActivity(), response.body().getMsg());
@@ -159,8 +164,10 @@ public class EditProfileFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fragment_edit_profile_tv_birth_date:
+                showCalender(getActivity(), getString(R.string.birth_date), fragmentEditProfileTvBirthDate, dateModel);
                 break;
             case R.id.fragment_edit_profile_tv_donation_date:
+                showCalender(getActivity(), getString(R.string.chose_donation_date), fragmentEditProfileTvDonationDate, dateModel);
                 break;
             case R.id.fragment_edit_profile_btn_edit:
                 editProfile();

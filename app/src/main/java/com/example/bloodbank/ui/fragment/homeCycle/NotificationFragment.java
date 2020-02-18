@@ -47,8 +47,8 @@ public class NotificationFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
         ButterKnife.bind(this, view);
 
-//        apiToken = LoadData(getActivity(), API_TOKEN);
-        apiToken = "W4mx3VMIWetLcvEcyF554CfxjZHwdtQldbdlCl2XAaBTDIpNjKO1f7CHuwKl";
+        apiToken = LoadData(getActivity(), API_TOKEN);
+//        apiToken = "W4mx3VMIWetLcvEcyF554CfxjZHwdtQldbdlCl2XAaBTDIpNjKO1f7CHuwKl";
 
         getNotification(1);
 

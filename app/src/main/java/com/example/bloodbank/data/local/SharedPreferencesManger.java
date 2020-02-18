@@ -14,9 +14,9 @@ public class SharedPreferencesManger {
     public static String PHONE = "PHONE";
     public static String API_TOKEN = "API_TOKEN";
     public static String PASSWORD = "PASSWORD";
-    public static String LATITUDE  = "LATITUDE";
-    public static String LONGITUDE  = "LONGITUDE";
-
+    public static String LATITUDE = "LATITUDE";
+    public static String LONGITUDE = "LONGITUDE";
+    public static  String FIREBASE_TOKEN = "FIREBASE_TOKEN";
 
 
     public static void setSharedPreferences(Activity activity) {

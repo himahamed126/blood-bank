@@ -117,4 +117,15 @@ public interface ApiServices {
     Call<NotificationSettings> changeNotificationSettings(@Field("api_token") String api_token,
                                                           @Field("governorates[]") List<Integer> governorates,
                                                           @Field("blood_types[]") List<Integer> blood_types);
+
+    @POST("signup-token")
+    @FormUrlEncoded
+    Call<Notification> registerNotificationToken(@Field("token") String token,
+                                                 @Field("api_token") String api_token,
+                                                 @Field("type") String type);
+
+    @POST("remove-token")
+    @FormUrlEncoded
+    Call<Notification> removeNotificationToken(@Field("token") String token,
+                                               @Field("api_token") String api_token);
 }
