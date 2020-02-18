@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bloodbank.R;
 import com.example.bloodbank.adapter.CheckBoxAdapter;
-import com.example.bloodbank.data.model.General.GenaralResponse;
-import com.example.bloodbank.data.model.General.GeneralData;
+import com.example.bloodbank.data.model.General.GeneralResponse;
 import com.example.bloodbank.data.model.notificationSettings.NotificationSettings;
 import com.example.bloodbank.ui.fragment.BaseFragment;
 
@@ -71,9 +70,9 @@ public class NotificationSettingsFragment extends BaseFragment {
 
 
     private void getBloodType() {
-        getClient().getbloodTypes().enqueue(new Callback<GenaralResponse>() {
+        getClient().getbloodTypes().enqueue(new Callback<GeneralResponse>() {
             @Override
-            public void onResponse(Call<GenaralResponse> call, Response<GenaralResponse> response) {
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 if (response.body().getStatus() == 1) {
                     bloodTypeAdapter = new CheckBoxAdapter(getActivity(), response.body().getData(), oldBloodTypeList);
                     fragmentNotifiSettRvBloodType.setAdapter(bloodTypeAdapter);
@@ -81,16 +80,16 @@ public class NotificationSettingsFragment extends BaseFragment {
             }
 
             @Override
-            public void onFailure(Call<GenaralResponse> call, Throwable t) {
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
 
             }
         });
     }
 
     private void getGovernorates() {
-        getClient().getGovernorates().enqueue(new Callback<GenaralResponse>() {
+        getClient().getGovernorates().enqueue(new Callback<GeneralResponse>() {
             @Override
-            public void onResponse(Call<GenaralResponse> call, Response<GenaralResponse> response) {
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 if (response.body().getStatus() == 1) {
                     governorateAdapter = new CheckBoxAdapter(getActivity(), response.body().getData(), oldGovernorateList);
                     fragmentNotifiSettRvGovernorate.setAdapter(governorateAdapter);
@@ -98,7 +97,7 @@ public class NotificationSettingsFragment extends BaseFragment {
             }
 
             @Override
-            public void onFailure(Call<GenaralResponse> call, Throwable t) {
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
 
             }
         });

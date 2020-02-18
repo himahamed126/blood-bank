@@ -97,7 +97,7 @@ public class AddDonationFragment extends BaseFragment {
     private void getGovernorate() {
         governorteAdapter = new GeneralResponseAdapter(getActivity());
         getSpinnerCityData(getClient().getGovernorates(), governorteAdapter,
-                fragmentAddDonationSpGovernorate, getString(R.string.governorate), new AdapterView.OnItemSelectedListener() {
+                fragmentAddDonationSpGovernorate, getString(R.string.governorate), 0, new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         citiesAdapter = new GeneralResponseAdapter(getActivity());

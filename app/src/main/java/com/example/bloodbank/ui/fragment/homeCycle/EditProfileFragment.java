@@ -17,7 +17,6 @@ import com.example.bloodbank.adapter.GeneralResponseAdapter;
 import com.example.bloodbank.data.model.login.ClientData;
 import com.example.bloodbank.data.model.login.Login;
 import com.example.bloodbank.helper.DateModel;
-import com.example.bloodbank.helper.HelperMethods;
 import com.example.bloodbank.ui.activity.HomeActivity;
 import com.example.bloodbank.ui.fragment.BaseFragment;
 
@@ -38,6 +37,7 @@ import static com.example.bloodbank.data.local.SharedPreferencesManger.loadUserD
 import static com.example.bloodbank.helper.HelperMethods.dismissProgressDialog;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData;
 import static com.example.bloodbank.helper.HelperMethods.getSpinnerCityData2;
+import static com.example.bloodbank.helper.HelperMethods.getSpinnerWithSelection;
 import static com.example.bloodbank.helper.HelperMethods.showCalender;
 import static com.example.bloodbank.helper.HelperMethods.showProgressDialog;
 import static com.example.bloodbank.helper.HelperMethods.showToast;
@@ -91,20 +91,24 @@ public class EditProfileFragment extends BaseFragment {
         governorateAdapter = new GeneralResponseAdapter(getActivity());
         cityAdapter = new GeneralResponseAdapter(getActivity());
 
-        getSpinnerCityData2(getClient().getbloodTypes(), bloodTypeAdapter, fragmentEditProfileSpBloodType, getString(R.string.blood_type), getActivity());
-        getSpinnerCityData(getClient().getGovernorates(), governorateAdapter, fragmentEditProfileSpGovernorate, getString(R.string.governorate), new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        getSpinnerWithSelection(getClient().getbloodTypes(), bloodTypeAdapter, fragmentEditProfileSpBloodType, getString(R.string.blood_type),
+                clientData.getClient().getBloodType().getId());
+
+        getSpinnerCityData(getClient().getGovernorates(), governorateAdapter, fragmentEditProfileSpGovernorate, getString(R.string.governorate),
+                clientData.getClient().getCity().getId(), new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                fragmentEditProfileSpCity.setSelection(clientData.getClient().getCity().getId());
-                getSpinnerCityData2(getClient().getCities(position), cityAdapter, fragmentEditProfileSpCity, getString(R.string.city), getActivity());
-            }
+                        getSpinnerWithSelection(getClient().getCities(position), cityAdapter, fragmentEditProfileSpCity, getString(R.string.city),
+                                Integer.parseInt(clientData.getClient().getCity().getGovernorateId()));
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        fragmentEditProfileSpBloodType.setSelection(clientData.getClient().getBloodType().getId());
+                    }
+                });
+
         fragmentEditProfileSpGovernorate.setSelection(Integer.parseInt(clientData.getClient().getCity().getGovernorateId()));
         fragmentEditProfileSpCity.setSelection(clientData.getClient().getCity().getId());
     }
@@ -141,8 +145,8 @@ public class EditProfileFragment extends BaseFragment {
                     if (response.body().getStatus() == 1) {
                         showToast(getActivity(), response.body().getMsg());
                         SaveData(getActivity(), API_TOKEN, response.body().getData().getApiToken());
-                        SaveData(getActivity(),USER_DATA,response.body().getData().getClient());
-                        SaveData(getActivity(),PASSWORD,password);
+                        SaveData(getActivity(), USER_DATA, response.body().getData().getClient());
+                        SaveData(getActivity(), PASSWORD, password);
                         startActivity(new Intent(getActivity(), HomeActivity.class));
                     } else {
                         showToast(getActivity(), response.body().getMsg());

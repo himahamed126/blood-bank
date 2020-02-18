@@ -77,7 +77,7 @@ public class DonationFragment extends BaseFragment {
 
     private void getBloodType() {
         bloodTypeAdapter = new GeneralResponseAdapter(getActivity());
-        getSpinnerCityData(getClient().getbloodTypes(), bloodTypeAdapter, fragmentDonationSpBloodType, getString(R.string.blood_type), new AdapterView.OnItemSelectedListener() {
+        getSpinnerCityData(getClient().getbloodTypes(), bloodTypeAdapter, fragmentDonationSpBloodType, getString(R.string.blood_type), 0, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 getAllDonationWithFilter(1);

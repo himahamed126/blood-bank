@@ -30,8 +30,6 @@ public class HomeActivity extends BaseActivity implements BottomNavigationView.O
         ButterKnife.bind(this);
 
         HomeFragment homeFragment = new HomeFragment();
-        EditProfileFragment editProfileFragment = new EditProfileFragment();
-        NotificationSettingsFragment notificationSettingsFragment = new NotificationSettingsFragment();
 
         replace(homeFragment, getSupportFragmentManager(), R.id.activity_home_fl_content);
         activityHomeBnBottomNavigation.setOnNavigationItemSelectedListener(this);

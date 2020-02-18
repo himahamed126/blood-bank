@@ -17,9 +17,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.example.bloodbank.R;
 import com.example.bloodbank.adapter.GeneralResponseAdapter;
-import com.example.bloodbank.data.model.General.GenaralResponse;
+import com.example.bloodbank.data.model.General.GeneralResponse;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -57,16 +56,19 @@ public class HelperMethods {
         checkDialog.dismiss();
     }
 
-    public static void getSpinnerCityData(Call<GenaralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
-                                          String hint, AdapterView.OnItemSelectedListener listener) {
+    public static void getSpinnerCityData(Call<GeneralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
+                                          String hint, int id, AdapterView.OnItemSelectedListener listener) {
 
-        call.enqueue(new Callback<GenaralResponse>() {
+        call.enqueue(new Callback<GeneralResponse>() {
             @Override
-            public void onResponse(Call<GenaralResponse> call, Response<GenaralResponse> response) {
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 try {
                     if (response.body().getStatus() == 1) {
                         spinnerAdapter.setData(response.body().getData(), hint);
                         spinner.setAdapter(spinnerAdapter);
+                        if (id != 0) {
+                            spinner.setSelection(id);
+                        }
                         spinner.setOnItemSelectedListener(listener);
                     }
                 } catch (Exception e) {
@@ -74,17 +76,17 @@ public class HelperMethods {
             }
 
             @Override
-            public void onFailure(Call<GenaralResponse> call, Throwable t) {
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
             }
         });
     }
 
-    public static void getSpinnerCityData2(Call<GenaralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
+    public static void getSpinnerCityData2(Call<GeneralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
                                            String hint, Activity activity) {
 //        showProgressDialog(activity, activity.getString(R.string.please_wait));
-        call.enqueue(new Callback<GenaralResponse>() {
+        call.enqueue(new Callback<GeneralResponse>() {
             @Override
-            public void onResponse(Call<GenaralResponse> call, Response<GenaralResponse> response) {
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 try {
                     if (response.body().getStatus() == 1) {
 //                        dismissProgressDialog();
@@ -96,10 +98,34 @@ public class HelperMethods {
             }
 
             @Override
-            public void onFailure(Call<GenaralResponse> call, Throwable t) {
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
             }
         });
     }
+
+    public static void getSpinnerWithSelection(Call<GeneralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
+                                               String hint, int id) {
+        call.enqueue(new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                try {
+                    if (response.body().getStatus() == 1) {
+                        spinnerAdapter.setData(response.body().getData(), hint);
+                        spinner.setAdapter(spinnerAdapter);
+                        if (id != 0) {
+                            spinner.setSelection(id);
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+            }
+        });
+    }
+
 
     public static void showCalender(Context context, String title, final TextView text_view_data, final DateModel data1) {
 

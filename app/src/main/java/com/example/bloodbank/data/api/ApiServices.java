@@ -1,7 +1,8 @@
 package com.example.bloodbank.data.api;
 
-import com.example.bloodbank.data.model.General.GenaralResponse;
+import com.example.bloodbank.data.model.General.GeneralResponse;
 import com.example.bloodbank.data.model.articles.Articles;
+import com.example.bloodbank.data.model.contactUs.ContactUs;
 import com.example.bloodbank.data.model.donations.Donations;
 import com.example.bloodbank.data.model.login.Login;
 import com.example.bloodbank.data.model.notificationSettings.NotificationSettings;
@@ -38,13 +39,13 @@ public interface ApiServices {
                       @Field("password") String password);
 
     @GET("governorates")
-    Call<GenaralResponse> getGovernorates();
+    Call<GeneralResponse> getGovernorates();
 
     @GET("cities")
-    Call<GenaralResponse> getCities(@Query("governorate_id") int governorate_id);
+    Call<GeneralResponse> getCities(@Query("governorate_id") int governorate_id);
 
     @GET("blood-types")
-    Call<GenaralResponse> getbloodTypes();
+    Call<GeneralResponse> getbloodTypes();
 
     @POST("reset-password")
     @FormUrlEncoded
@@ -73,7 +74,7 @@ public interface ApiServices {
                                          @Query("category_id") int category_id);
 
     @GET("categories")
-    Call<GenaralResponse> getCategories();
+    Call<GeneralResponse> getCategories();
 
     @GET("donation-requests")
     Call<Donations> getAllDonation(@Query("api_token") String api_token,
@@ -120,12 +121,18 @@ public interface ApiServices {
 
     @POST("signup-token")
     @FormUrlEncoded
-    Call<Notification> registerNotificationToken(@Field("token") String token,
-                                                 @Field("api_token") String api_token,
-                                                 @Field("type") String type);
+    Call<GeneralResponse> registerNotificationToken(@Field("token") String token,
+                                                    @Field("api_token") String api_token,
+                                                    @Field("type") String type);
 
     @POST("remove-token")
     @FormUrlEncoded
-    Call<Notification> removeNotificationToken(@Field("token") String token,
-                                               @Field("api_token") String api_token);
+    Call<GeneralResponse> removeNotificationToken(@Field("token") String token,
+                                                  @Field("api_token") String api_token);
+
+    @POST("remove-token")
+    @FormUrlEncoded
+    Call<ContactUs> contactUs(@Field("api_token") String api_token,
+                              @Field("title") String title,
+                              @Field("message") String message);
 }

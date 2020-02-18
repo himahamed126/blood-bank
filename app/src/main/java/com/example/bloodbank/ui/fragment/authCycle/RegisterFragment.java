@@ -80,18 +80,19 @@ public class RegisterFragment extends BaseFragment {
         getSpinnerCityData2(getClient().getbloodTypes(), bloodTypeAdapter, fragmentRegisterSpBloodType, getString(R.string.blood_type), getActivity());
 
         governorateAdapter = new GeneralResponseAdapter(getActivity());
-        getSpinnerCityData(getClient().getGovernorates(), governorateAdapter, fragmentRegisterSpGovernorate, getString(R.string.governorate), new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cityAdapter = new GeneralResponseAdapter(getActivity());
-                getSpinnerCityData2(getClient().getCities(position), cityAdapter, fragmentRegisterSpCity, getString(R.string.city), getActivity());
-            }
+        getSpinnerCityData(getClient().getGovernorates(), governorateAdapter, fragmentRegisterSpGovernorate,
+                getString(R.string.governorate), 0, new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        cityAdapter = new GeneralResponseAdapter(getActivity());
+                        getSpinnerCityData2(getClient().getCities(position), cityAdapter, fragmentRegisterSpCity, getString(R.string.city), getActivity());
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                    }
+                });
 
         return view;
     }

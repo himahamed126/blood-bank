@@ -23,7 +23,7 @@ public class GeneralData {
     private String governorateId;
     @SerializedName("governorate")
     @Expose
-    private GenaralResponse governorate;
+    private GeneralResponse governorate;
 
     public GeneralData(Integer id, String name) {
         this.id = id;
@@ -70,11 +70,11 @@ public class GeneralData {
         this.governorateId = governorateId;
     }
 
-    public GenaralResponse getGovernorate() {
+    public GeneralResponse getGovernorate() {
         return governorate;
     }
 
-    public void setGovernorate(GenaralResponse governorate) {
+    public void setGovernorate(GeneralResponse governorate) {
         this.governorate = governorate;
     }
 

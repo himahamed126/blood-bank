@@ -1,12 +1,10 @@
 
-package com.example.bloodbank.data.model.General;
-
-import java.util.List;
+package com.example.bloodbank.data.model.contactUs;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GenaralResponse {
+public class ContactUs {
 
     @SerializedName("status")
     @Expose
@@ -16,7 +14,7 @@ public class GenaralResponse {
     private String msg;
     @SerializedName("data")
     @Expose
-    private List<GeneralData> data = null;
+    private Data data;
 
     public Integer getStatus() {
         return status;
@@ -34,11 +32,11 @@ public class GenaralResponse {
         this.msg = msg;
     }
 
-    public List<GeneralData> getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(List<GeneralData> data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
