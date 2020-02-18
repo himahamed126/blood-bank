@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -54,11 +56,18 @@ public class ArticleFragment extends BaseFragment {
     private static final String TAG = "ArticleFragment";
     private String keyWord;
 
+    private int[] animationList = {R.anim.layou_animation_left_to_right, R.anim.layou_animation_left_to_right};
+    private int i = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setupAcvtivity();
         View view = inflater.inflate(R.layout.fragment_article, container, false);
         ButterKnife.bind(this, view);
+
+        int resId = R.anim.layou_animation_left_to_right;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getActivity(), resId);
+        fragmentArticlesRvArticles.setLayoutAnimation(animation);
 
         Log.i(TAG, LoadData(getActivity(), API_TOKEN));
 
@@ -75,6 +84,8 @@ public class ArticleFragment extends BaseFragment {
     }
 
     private void initRec() {
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         fragmentArticlesRvArticles.setLayoutManager(linearLayoutManager);
         onEndLess = new OnEndLess(linearLayoutManager, 1) {
@@ -99,7 +110,6 @@ public class ArticleFragment extends BaseFragment {
 
     private void getArticles(int page) {
         articlesList = new ArrayList<>();
-//        showProgressDialog(getActivity(), getString(R.string.please_wait));
         getClient().getArticles(LoadData(getActivity(), API_TOKEN), page).enqueue(new Callback<Articles>() {
             @Override
             public void onResponse(Call<Articles> call, Response<Articles> response) {
@@ -107,7 +117,7 @@ public class ArticleFragment extends BaseFragment {
                 if (response.body().getStatus() == 1) {
                     articlesList.addAll(response.body().getData().getData());
                     maxPage = response.body().getData().getLastPage();
-                    articlesAndFavoriteAdapter = new ArticlesAndFavoriteAdapter(getActivity(), articlesList,false);
+                    articlesAndFavoriteAdapter = new ArticlesAndFavoriteAdapter(getActivity(), articlesList, false);
                     fragmentArticlesRvArticles.setAdapter(articlesAndFavoriteAdapter);
                 } else {
                     Log.i(TAG, response.body().getMsg());
@@ -134,7 +144,7 @@ public class ArticleFragment extends BaseFragment {
                     articlesList.clear();
                     articlesList.addAll(response.body().getData().getData());
                     maxPage = response.body().getData().getLastPage();
-                    articlesAndFavoriteAdapter = new ArticlesAndFavoriteAdapter(getActivity(), articlesList,false);
+                    articlesAndFavoriteAdapter = new ArticlesAndFavoriteAdapter(getActivity(), articlesList, false);
                     fragmentArticlesRvArticles.setAdapter(articlesAndFavoriteAdapter);
                 } else {
                     Log.i(TAG, response.body().getMsg());
@@ -148,11 +158,15 @@ public class ArticleFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public void onBack() {
-        super.onBack();
-    }
+    private void runAnimationAgain() {
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(getActivity(), animationList[i]);
 
+        fragmentArticlesRvArticles.setLayoutAnimation(controller);
+        articlesAndFavoriteAdapter.notifyDataSetChanged();
+        fragmentArticlesRvArticles.scheduleLayoutAnimation();
+
+    }
 
     @OnClick({R.id.fragment_articles_btn_search, R.id.fragment_articles_fab_add})
     public void onViewClicked(View view) {
@@ -171,4 +185,11 @@ public class ArticleFragment extends BaseFragment {
                 break;
         }
     }
+
+
+    @Override
+    public void onBack() {
+        super.onBack();
+    }
+
 }

@@ -10,6 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/red"
         app:tabIndicatorColor="@color/gray"
+        app:tabIndicatorHeight="4dp"
         app:tabTextAppearance="@style/tab_style" />
 
     <androidx.viewpager.widget.ViewPager

@@ -83,13 +83,11 @@ public class HelperMethods {
 
     public static void getSpinnerCityData2(Call<GeneralResponse> call, GeneralResponseAdapter spinnerAdapter, Spinner spinner,
                                            String hint, Activity activity) {
-//        showProgressDialog(activity, activity.getString(R.string.please_wait));
         call.enqueue(new Callback<GeneralResponse>() {
             @Override
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 try {
                     if (response.body().getStatus() == 1) {
-//                        dismissProgressDialog();
                         spinnerAdapter.setData(response.body().getData(), hint);
                         spinner.setAdapter(spinnerAdapter);
                     }

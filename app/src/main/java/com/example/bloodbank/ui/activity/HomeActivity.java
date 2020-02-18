@@ -10,7 +10,6 @@ import com.example.bloodbank.ui.fragment.homeCycle.EditProfileFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.HomeFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.MoreFragment;
 import com.example.bloodbank.ui.fragment.homeCycle.NotificationFragment;
-import com.example.bloodbank.ui.fragment.homeCycle.NotificationSettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;

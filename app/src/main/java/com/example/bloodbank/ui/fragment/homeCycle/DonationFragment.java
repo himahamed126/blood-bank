@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
@@ -91,6 +93,19 @@ public class DonationFragment extends BaseFragment {
     }
 
     private void initRec() {
+
+
+        int resId = R.anim.layou_animation_left_to_right;
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getActivity(), resId);
+        fragmentDonationRvDonationRequest.setLayoutAnimation(animation);
+
+
+//        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(),
+//                R.anim.layou_animation_left_to_right);
+//        fragmentDonationRvDonationRequest.setLayoutAnimation(controller);
+//        fragmentDonationRvDonationRequest.getAdapter().notifyDataSetChanged();
+//        fragmentDonationRvDonationRequest.scheduleLayoutAnimation();
+
         linearLayoutManager = new LinearLayoutManager(getActivity());
         fragmentDonationRvDonationRequest.setLayoutManager(linearLayoutManager);
         donationsList = new ArrayList<>();
