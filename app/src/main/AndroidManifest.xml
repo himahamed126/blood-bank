@@ -14,6 +14,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".Application"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,15 +23,17 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".ui.activity.HomeActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.AuthActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.AuthActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.SplashActivity"></activity>
         <activity android:name=".ui.activity.MapsActivity"></activity>
 
         <service

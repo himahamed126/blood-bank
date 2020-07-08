@@ -23,9 +23,10 @@ import com.google.android.gms.tasks.Task;
 
 import butterknife.ButterKnife;
 
-import static com.example.bloodbank.data.local.SharedPreferencesManger.LATITUDE;
-import static com.example.bloodbank.data.local.SharedPreferencesManger.LONGITUDE;
+
 import static com.example.bloodbank.data.local.SharedPreferencesManger.SaveData;
+import static com.example.bloodbank.helper.ConstansKt.LATITUDE;
+import static com.example.bloodbank.helper.ConstansKt.LONGITUDE;
 import static com.example.bloodbank.helper.HelperMethods.showToast;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
