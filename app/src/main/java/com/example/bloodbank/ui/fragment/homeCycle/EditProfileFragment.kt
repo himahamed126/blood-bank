@@ -16,20 +16,20 @@ import com.example.bloodbank.data.local.SharedPreferencesManger.loadUserData
 import com.example.bloodbank.data.model.login.ClientData
 import com.example.bloodbank.data.model.login.Login
 import com.example.bloodbank.databinding.FragmentEditProfileBinding
+import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.DateModel
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.getSpinnerCityData
-import com.example.bloodbank.helper.HelperMethods.getSpinnerWithSelection
-import com.example.bloodbank.helper.HelperMethods.showCalender
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showToast
-import com.example.bloodbank.helper.PASSWORD
-import com.example.bloodbank.helper.USER_DATA
 import com.example.bloodbank.ui.activity.HomeActivity
 import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.DateModel
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.getSpinnerCityData
+import com.example.bloodbank.utils.HelperMethods.getSpinnerWithSelection
+import com.example.bloodbank.utils.HelperMethods.showCalender
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
+import com.example.bloodbank.utils.PASSWORD
+import com.example.bloodbank.utils.USER_DATA
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,13 +70,13 @@ class EditProfileFragment : BaseFragment(), View.OnClickListener {
         bloodTypeAdapter = GeneralResponseAdapter(activity)
         governorateAdapter = GeneralResponseAdapter(activity)
         cityAdapter = GeneralResponseAdapter(activity)
-        getSpinnerWithSelection(client.getbloodTypes(), bloodTypeAdapter!!, binding.fragmentEditProfileSpBloodType, getString(R.string.blood_type),
+        getSpinnerWithSelection(client().getbloodTypes(), bloodTypeAdapter!!, binding.fragmentEditProfileSpBloodType, getString(R.string.blood_type),
                 clientData!!.client!!.bloodType!!.id)
-        getSpinnerCityData(client.governorates, governorateAdapter!!, binding.fragmentEditProfileSpGovernorate, getString(R.string.governorate),
+        getSpinnerCityData(client().governorates, governorateAdapter!!, binding.fragmentEditProfileSpGovernorate, getString(R.string.governorate),
                 clientData!!.client!!.city!!.id, object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
 //                fragmentEditProfileSpCity.setSelection(clientData.getClient().getCity().getId());
-                getSpinnerWithSelection(client.getCities(position), cityAdapter!!, binding.fragmentEditProfileSpCity, getString(R.string.city), clientData!!.client!!.city!!.governorateId!!.toInt())
+                getSpinnerWithSelection(client().getCities(position), cityAdapter!!, binding.fragmentEditProfileSpCity, getString(R.string.city), clientData!!.client!!.city!!.governorateId!!.toInt())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -96,19 +96,20 @@ class EditProfileFragment : BaseFragment(), View.OnClickListener {
         city_id = binding.fragmentEditProfileSpCity.selectedItemPosition
         blood_type_id = binding.fragmentEditProfileSpBloodType.selectedItemPosition
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.signup(name!!, email!!, birth_date!!, city_id, phone!!, donation_last_date!!,
+        client().signup(name!!, email!!, birth_date!!, city_id, phone!!, donation_last_date!!,
                 password!!, password_confirmation!!, blood_type_id).enqueue(object : Callback<Login> {
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 dismissProgressDialog()
                 try {
                     if (response.body()!!.status == 1) {
-                        showToast(activity, response.body()!!.msg)
+                        activity!!.createToast(response.body()!!.msg!!)
+
                         SaveData(activity!!, API_TOKEN, response.body()!!.data!!.apiToken)
                         SaveData(activity!!, USER_DATA, response.body()!!.data!!.client)
                         SaveData(activity!!, PASSWORD, password)
                         startActivity(Intent(activity, HomeActivity::class.java))
                     } else {
-                        showToast(activity, response.body()!!.msg)
+                        activity!!.createToast(response.body()!!.msg!!)
                         Log.i(TAG, response.body()!!.msg.toString())
                     }
                 } catch (e: Exception) {

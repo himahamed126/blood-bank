@@ -1,4 +1,4 @@
-package com.example.bloodbank.helper
+package com.example.bloodbank.utils
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,11 +10,10 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.bloodbank.data.model.general.GeneralData
-import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.data.model.general.GeneralResponse
+import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import org.ocpsoft.prettytime.PrettyTime
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,11 +25,6 @@ import java.util.*
 
 object HelperMethods {
     private var checkDialog: ProgressDialog? = null
-
-    @JvmStatic
-    fun showToast(activity: Activity?, message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
 
     @JvmStatic
     fun showProgressDialog(activity: Activity?, title: String?) {

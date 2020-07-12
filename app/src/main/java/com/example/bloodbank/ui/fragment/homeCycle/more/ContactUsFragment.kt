@@ -9,12 +9,12 @@ import com.example.bloodbank.data.api.ApiClient.client
 import com.example.bloodbank.data.local.SharedPreferencesManger.LoadData
 import com.example.bloodbank.data.model.contactUs.ContactUs
 import com.example.bloodbank.databinding.FragmentContactUsBinding
+import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showToast
 import com.example.bloodbank.ui.fragment.BaseFragment
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,13 +35,13 @@ class ContactUsFragment : BaseFragment(), View.OnClickListener {
         val title = binding.fragmentContactUsEdMessageTitle.text.toString()
         val content = binding.fragmentContactUsEdMessageContent.text.toString()
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.contactUs(apiToken!!, title, content).enqueue(object : Callback<ContactUs> {
+        client().contactUs(apiToken!!, title, content).enqueue(object : Callback<ContactUs> {
             override fun onResponse(call: Call<ContactUs>, response: Response<ContactUs>) {
                 dismissProgressDialog()
                 if (response.body()!!.status == 1) {
-                    showToast(activity, response.body()!!.msg)
+                    activity!!.createToast(response.body()!!.msg!!)
                 } else {
-                    showToast(activity, response.body()!!.msg)
+                    activity!!.createToast(response.body()!!.msg!!)
                 }
             }
 

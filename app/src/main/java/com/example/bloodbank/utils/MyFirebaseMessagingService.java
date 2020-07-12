@@ -1,4 +1,4 @@
-package com.example.bloodbank.helper;
+package com.example.bloodbank.utils;
 
 import android.app.NotificationManager;
 import android.content.Context;

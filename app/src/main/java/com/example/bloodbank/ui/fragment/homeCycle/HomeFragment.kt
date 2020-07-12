@@ -11,7 +11,7 @@ import com.example.bloodbank.extensions.addFragment
 import com.example.bloodbank.extensions.inflateWithBinding
 import com.example.bloodbank.extensions.replaceFragment
 import com.example.bloodbank.ui.fragment.BaseFragment
-import com.example.bloodbank.ui.fragment.authCycle.LoginFragment
+import com.example.bloodbank.ui.fragment.authCycle.login.LoginFragment
 import com.example.bloodbank.ui.fragment.homeCycle.articles.ArticleFragment
 import com.example.bloodbank.ui.fragment.homeCycle.donations.AddDonationFragment
 import com.example.bloodbank.ui.fragment.homeCycle.donations.DonationFragment

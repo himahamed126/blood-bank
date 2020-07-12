@@ -13,9 +13,9 @@ import com.example.bloodbank.data.model.articles.Articles
 import com.example.bloodbank.data.model.articles.ArticlesData
 import com.example.bloodbank.databinding.FragmentArticleBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods
-import com.example.bloodbank.helper.OnEndLess
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods
+import com.example.bloodbank.utils.OnEndLess
 import com.example.bloodbank.ui.adapter.ArticlesAndFavoriteAdapter
 import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
@@ -43,7 +43,7 @@ class ArticleFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun init() {
-        apiToken = LoadData(activity!!, API_TOKEN)!!
+        apiToken = LoadData(requireActivity(), API_TOKEN)!!
         if (apiToken.isEmpty()) {
             Log.i(TAG, "null")
         } else {
@@ -60,7 +60,7 @@ class ArticleFragment : BaseFragment(), View.OnClickListener {
     private val category: Unit
         get() {
             categoriesAdapter = GeneralResponseAdapter(activity)
-            HelperMethods.getSpinnerCityData2(client.categories, categoriesAdapter!!,
+            HelperMethods.getSpinnerCityData2(client().categories, categoriesAdapter!!,
                     binding.fragmentArticlesSp, getString(R.string.all_articles), activity)
         }
 
@@ -89,7 +89,7 @@ class ArticleFragment : BaseFragment(), View.OnClickListener {
 
     private fun getArticles(page: Int) {
         articlesList = mutableListOf()
-        client.getArticles(apiToken, page).enqueue(object : Callback<Articles> {
+        client().getArticles(apiToken, page).enqueue(object : Callback<Articles> {
             override fun onResponse(call: Call<Articles>, response: Response<Articles>) {
 //                dismissProgressDialog();
                 if (response.body()!!.status == 1) {
@@ -110,7 +110,7 @@ class ArticleFragment : BaseFragment(), View.OnClickListener {
         articlesList = mutableListOf()
         keyWord = binding.fragmentArticlesEdSearch.text.toString()
         HelperMethods.showProgressDialog(activity, getString(R.string.please_wait))
-        client.getArticlesWithFilter(LoadData(activity!!, API_TOKEN)!!, page,
+        client().getArticlesWithFilter(LoadData(requireActivity(), API_TOKEN)!!, page,
                 keyWord!!, binding.fragmentArticlesSp.selectedItemPosition).enqueue(object : Callback<Articles> {
             override fun onResponse(call: Call<Articles>, response: Response<Articles>) {
                 HelperMethods.dismissProgressDialog()

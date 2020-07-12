@@ -23,7 +23,7 @@
     <string name="confirm_new_password">تاكيد كلمة المرور الجديدة</string>
     <string name="change">تغيير</string>
     <string name="splash_text">لوريم ايبسوم هو نموذج افتراضي يوضع فى التصاميم لتعرض على العميل ليتصور طريقة وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعة بروشور او فلاير على سبيل المثال … او نماذج مواقع</string>
-    <string name="please_wait">من فضلك انتظر</string>
+    <string name="please_wait">من فضلك انتظر ...</string>
     <string name="governorate">المحافظة</string>
     <string name="city">المدينة</string>
     <string name="blood_type">فصيلة الدم</string>

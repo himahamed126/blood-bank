@@ -13,14 +13,14 @@ import com.example.bloodbank.data.model.general.GeneralData
 import com.example.bloodbank.data.model.general.GeneralResponse
 import com.example.bloodbank.data.model.notificationSettings.NotificationSettings
 import com.example.bloodbank.databinding.FragmentNotificationSettingsBinding
+import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
 import com.example.bloodbank.extensions.visible
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showToast
 import com.example.bloodbank.ui.adapter.CheckBoxAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,7 +51,7 @@ class NotificationSettingsFragment : BaseFragment(), View.OnClickListener {
     }
 
     fun bloodType() {
-        client.getbloodTypes().enqueue(object : Callback<GeneralResponse> {
+        client().getbloodTypes().enqueue(object : Callback<GeneralResponse> {
             override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
                 if (response.body()!!.status == 1) {
                     bloodTypeAdapter = CheckBoxAdapter((response.body()!!.data as MutableList<GeneralData>?)!!, oldBloodTypeList)
@@ -64,7 +64,7 @@ class NotificationSettingsFragment : BaseFragment(), View.OnClickListener {
     }
 
     fun governorates() {
-        client.governorates.enqueue(object : Callback<GeneralResponse> {
+        client().governorates.enqueue(object : Callback<GeneralResponse> {
             override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
                 if (response.body()!!.status == 1) {
                     governorateAdapter = CheckBoxAdapter((response.body()!!.data as MutableList<GeneralData>?)!!, oldGovernorateList)
@@ -80,7 +80,7 @@ class NotificationSettingsFragment : BaseFragment(), View.OnClickListener {
         oldBloodTypeList = mutableListOf()
         oldGovernorateList = mutableListOf()
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.getNotificationSettings(LoadData(activity!!, API_TOKEN)!!).enqueue(object : Callback<NotificationSettings> {
+        client().getNotificationSettings(LoadData(activity!!, API_TOKEN)!!).enqueue(object : Callback<NotificationSettings> {
             override fun onResponse(call: Call<NotificationSettings>, response: Response<NotificationSettings>) {
                 if (response.body()!!.status == 1) {
                     dismissProgressDialog()
@@ -102,11 +102,11 @@ class NotificationSettingsFragment : BaseFragment(), View.OnClickListener {
 
     private fun changeNotificationSettings() {
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.changeNotificationSettings(LoadData(activity!!, API_TOKEN)!!, governorateAdapter!!.newIds, bloodTypeAdapter!!.newIds).enqueue(object : Callback<NotificationSettings> {
+        client().changeNotificationSettings(LoadData(activity!!, API_TOKEN)!!, governorateAdapter!!.newIds, bloodTypeAdapter!!.newIds).enqueue(object : Callback<NotificationSettings> {
             override fun onResponse(call: Call<NotificationSettings>, response: Response<NotificationSettings>) {
                 dismissProgressDialog()
                 if (response.body()!!.status == 1) {
-                    showToast(activity, response.body()!!.msg)
+                    activity!!.createToast(response.body()!!.msg!!)
                 }
             }
 

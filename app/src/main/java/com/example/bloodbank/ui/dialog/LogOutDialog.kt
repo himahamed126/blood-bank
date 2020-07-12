@@ -15,8 +15,8 @@ import com.example.bloodbank.data.local.SharedPreferencesManger.clean
 import com.example.bloodbank.data.model.general.GeneralResponse
 import com.example.bloodbank.databinding.DialogLogOutBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.FIREBASE_TOKEN
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.FIREBASE_TOKEN
 import com.example.bloodbank.ui.activity.SplashActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,22 +38,22 @@ class LogOutDialog : DialogFragment(), View.OnClickListener {
         return binding.root
     }
 
-    private fun removeFirebaseToken() {
-        client.removeNotificationToken(LoadData(activity!!, FIREBASE_TOKEN)!!, LoadData(activity!!, API_TOKEN)!!).enqueue(object : Callback<GeneralResponse> {
-            override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
-                if (response.body()!!.status == 1) {
-                    Log.i(TAG, "onResponse: " + response.body()!!.msg)
-                    clean(activity!!)
-                    val intent = Intent(activity, SplashActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.i(TAG, "onResponse: " + response.body()!!.msg)
-                }
-            }
-
-            override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {}
-        })
-    }
+//    private fun removeFirebaseToken() {
+//        client().removeNotificationToken(LoadData(activity!!, FIREBASE_TOKEN)!!, LoadData(activity!!, API_TOKEN)!!).enqueue(object : Callback<GeneralResponse> {
+//            override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
+//                if (response.body()!!.status == 1) {
+//                    Log.i(TAG, "onResponse: " + response.body()!!.msg)
+//                    clean(activity!!)
+//                    val intent = Intent(activity, SplashActivity::class.java)
+//                    startActivity(intent)
+//                } else {
+//                    Log.i(TAG, "onResponse: " + response.body()!!.msg)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {}
+//        })
+//    }
 
     override fun onClick(view: View) {
         when (view.id) {

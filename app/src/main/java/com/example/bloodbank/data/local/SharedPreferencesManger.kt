@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.bloodbank.data.model.login.ClientData
-import com.example.bloodbank.helper.USER_DATA
+import com.example.bloodbank.utils.USER_DATA
 import com.google.gson.Gson
 
 object SharedPreferencesManger {

@@ -1,4 +1,4 @@
-package com.example.bloodbank.helper;
+package com.example.bloodbank.utils;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

@@ -8,7 +8,7 @@
             name="notification"
             type="com.example.bloodbank.data.model.notifications.NotificationData" />
 
-        <import type="com.example.bloodbank.helper.HelperMethods" />
+        <import type="com.example.bloodbank.utils.HelperMethods" />
     </data>
 
     <androidx.cardview.widget.CardView

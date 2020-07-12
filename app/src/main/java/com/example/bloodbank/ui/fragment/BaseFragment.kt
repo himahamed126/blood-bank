@@ -1,7 +1,7 @@
 package com.example.bloodbank.ui.fragment
 
 import androidx.fragment.app.Fragment
-import com.example.bloodbank.ui.activity.BaseActivity
+import com.example.bloodbank.ui.base.BaseActivity
 import com.example.bloodbank.ui.activity.HomeActivity
 
 open class BaseFragment : Fragment() {

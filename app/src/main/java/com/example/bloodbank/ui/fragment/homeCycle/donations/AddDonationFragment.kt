@@ -15,18 +15,18 @@ import com.example.bloodbank.data.local.SharedPreferencesManger.LoadData
 import com.example.bloodbank.data.local.SharedPreferencesManger.SaveData
 import com.example.bloodbank.data.model.donations.Donations
 import com.example.bloodbank.databinding.FragmentAddDonationBinding
+import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.getSpinnerCityData
-import com.example.bloodbank.helper.HelperMethods.getSpinnerCityData2
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showToast
-import com.example.bloodbank.helper.LATITUDE
-import com.example.bloodbank.helper.LONGITUDE
 import com.example.bloodbank.ui.activity.MapsActivity
 import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.getSpinnerCityData
+import com.example.bloodbank.utils.HelperMethods.getSpinnerCityData2
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
+import com.example.bloodbank.utils.LATITUDE
+import com.example.bloodbank.utils.LONGITUDE
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,17 +73,17 @@ class AddDonationFragment : BaseFragment(), View.OnClickListener {
 
     private fun bloodType() {
         bloodTypeAdapter = GeneralResponseAdapter(this.activity!!)
-        getSpinnerCityData2(client.getbloodTypes(), bloodTypeAdapter!!,
+        getSpinnerCityData2(client().getbloodTypes(), bloodTypeAdapter!!,
                 binding.fragmentAddDonationSpBloodType, getString(R.string.blood_type), activity)
     }
 
     private fun governorate() {
         governorteAdapter = GeneralResponseAdapter(this.activity!!)
-        getSpinnerCityData(client.governorates, governorteAdapter!!,
+        getSpinnerCityData(client().governorates, governorteAdapter!!,
                 binding.fragmentAddDonationSpGovernorate, getString(R.string.governorate), 0, object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 citiesAdapter = GeneralResponseAdapter(activity as Context)
-                getSpinnerCityData2(client.getCities(position), citiesAdapter!!,
+                getSpinnerCityData2(client().getCities(position), citiesAdapter!!,
                         binding.fragmentAddDonationSpCity, getString(R.string.city), activity)
             }
 
@@ -111,7 +111,7 @@ class AddDonationFragment : BaseFragment(), View.OnClickListener {
     private fun addRequest() {
         checkData()
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.addDonationRequset(LoadData(activity!!, API_TOKEN)!!,
+        client().addDonationRequset(LoadData(activity!!, API_TOKEN)!!,
                 name!!, age!!, bloodTypeId, bagsNum!!, hospitalName!!, hospitalAddress!!,
                 cityId, phone!!, notes!!, latitude!!, longitude!!).enqueue(object : Callback<Donations> {
             override fun onResponse(call: Call<Donations>, response: Response<Donations>) {
@@ -119,9 +119,9 @@ class AddDonationFragment : BaseFragment(), View.OnClickListener {
                 if (response.body()!!.status == 1) {
                     SaveData(activity!!, LONGITUDE, "")
                     SaveData(activity!!, LATITUDE, "")
-                    showToast(activity, response.body()!!.msg)
+                    activity!!.createToast(response.body()!!.msg!!)
                 } else {
-                    showToast(activity, response.body()!!.msg)
+                    activity!!.createToast(response.body()!!.msg!!)
                     Log.i(TAG, response.body()!!.msg.toString())
                 }
             }

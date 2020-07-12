@@ -15,9 +15,9 @@ import com.example.bloodbank.data.model.donations.DonationData
 import com.example.bloodbank.data.model.donations.Donations
 import com.example.bloodbank.databinding.FragmentDonationBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods
-import com.example.bloodbank.helper.OnEndLess
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods
+import com.example.bloodbank.utils.OnEndLess
 import com.example.bloodbank.ui.adapter.DonationAdapter
 import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
@@ -57,13 +57,13 @@ class DonationFragment : BaseFragment() {
     private fun governoters() {
 
         cityAdapter = GeneralResponseAdapter(this.activity!!)
-        HelperMethods.getSpinnerCityData2(client.governorates, cityAdapter!!, binding.fragmentDonationSpCity,
+        HelperMethods.getSpinnerCityData2(client().governorates, cityAdapter!!, binding.fragmentDonationSpCity,
                 getString(R.string.governorate), activity)
     }
 
     private fun bloodType() {
         bloodTypeAdapter = GeneralResponseAdapter(this.activity!!)
-        HelperMethods.getSpinnerCityData(client.getbloodTypes(), bloodTypeAdapter!!, binding.fragmentDonationSpBloodType, getString(R.string.blood_type), 0, object : OnItemSelectedListener {
+        HelperMethods.getSpinnerCityData(client().getbloodTypes(), bloodTypeAdapter!!, binding.fragmentDonationSpBloodType, getString(R.string.blood_type), 0, object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 getAllDonationWithFilter(1)
             }
@@ -98,7 +98,7 @@ class DonationFragment : BaseFragment() {
 
     private fun getAllDonation(page: Int) {
 //        showProgressDialog(getActivity(), getString(R.string.please_wait));
-        client.getAllDonation(LoadData(activity!!, API_TOKEN)!!, page).enqueue(object : Callback<Donations> {
+        client().getAllDonation(LoadData(activity!!, API_TOKEN)!!, page).enqueue(object : Callback<Donations> {
             override fun onResponse(call: Call<Donations>, response: Response<Donations>) {
 //                dismissProgressDialog();
                 if (response.body()!!.status == 1) {
@@ -118,7 +118,7 @@ class DonationFragment : BaseFragment() {
     private fun getAllDonationWithFilter(page: Int) {
         donationsList = mutableListOf()
         HelperMethods.showProgressDialog(activity, getString(R.string.please_wait))
-        client.getAllDonationWithFilter(LoadData(activity!!, API_TOKEN)!!,
+        client().getAllDonationWithFilter(LoadData(activity!!, API_TOKEN)!!,
                 binding.fragmentDonationSpBloodType!!.selectedItemPosition, binding.fragmentDonationSpCity!!.selectedItemPosition,
                 page).enqueue(object : Callback<Donations> {
             override fun onResponse(call: Call<Donations>, response: Response<Donations>) {

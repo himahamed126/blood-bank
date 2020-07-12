@@ -13,10 +13,10 @@ import com.example.bloodbank.data.model.articles.Articles
 import com.example.bloodbank.data.model.articles.ArticlesData
 import com.example.bloodbank.databinding.FragmentFavoriteBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
-import com.example.bloodbank.helper.OnEndLess
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
+import com.example.bloodbank.utils.OnEndLess
 import com.example.bloodbank.ui.adapter.ArticlesAndFavoriteAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
 import retrofit2.Call
@@ -60,7 +60,7 @@ class FavoriteFragment : BaseFragment() {
     private fun getFavoriteArticles(page: Int) {
         articlesList = mutableListOf()
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.getFavoriteArticles(LoadData(activity!!, API_TOKEN)!!, page).enqueue(object : Callback<Articles> {
+        client().getFavoriteArticles(LoadData(activity!!, API_TOKEN)!!, page).enqueue(object : Callback<Articles> {
             override fun onResponse(call: Call<Articles>, response: Response<Articles>) {
                 dismissProgressDialog()
                 if (response.body()!!.status == 1) {

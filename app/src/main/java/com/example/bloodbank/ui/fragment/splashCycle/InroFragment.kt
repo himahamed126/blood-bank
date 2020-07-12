@@ -12,7 +12,7 @@ import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.ui.adapter.SliderPagerAdapter
 import com.example.bloodbank.databinding.FragmentInroBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.FIRST_LAUNCH
+import com.example.bloodbank.utils.FIRST_LAUNCH
 import com.example.bloodbank.ui.activity.AuthActivity
 import com.example.bloodbank.ui.fragment.BaseFragment
 

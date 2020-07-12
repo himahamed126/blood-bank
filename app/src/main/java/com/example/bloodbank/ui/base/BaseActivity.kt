@@ -1,4 +1,4 @@
-package com.example.bloodbank.ui.activity
+package com.example.bloodbank.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bloodbank.ui.fragment.BaseFragment

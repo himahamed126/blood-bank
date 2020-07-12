@@ -7,6 +7,7 @@ import butterknife.ButterKnife
 import com.example.bloodbank.R
 import com.example.bloodbank.databinding.ActivityHomeBinding
 import com.example.bloodbank.extensions.replaceFragment
+import com.example.bloodbank.ui.base.BaseActivity
 import com.example.bloodbank.ui.fragment.homeCycle.EditProfileFragment
 import com.example.bloodbank.ui.fragment.homeCycle.HomeFragment
 import com.example.bloodbank.ui.fragment.homeCycle.more.MoreFragment

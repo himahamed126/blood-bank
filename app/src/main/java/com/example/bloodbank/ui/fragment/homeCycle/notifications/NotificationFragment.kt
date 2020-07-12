@@ -13,9 +13,9 @@ import com.example.bloodbank.data.model.notifications.Notification
 import com.example.bloodbank.data.model.notifications.NotificationData
 import com.example.bloodbank.databinding.FragmentNotificationBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.helper.API_TOKEN
-import com.example.bloodbank.helper.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.helper.HelperMethods.showProgressDialog
+import com.example.bloodbank.utils.API_TOKEN
+import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
+import com.example.bloodbank.utils.HelperMethods.showProgressDialog
 import com.example.bloodbank.ui.adapter.NotificationAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
 import retrofit2.Call
@@ -49,7 +49,7 @@ class NotificationFragment : BaseFragment() {
 
     private fun getNotification(page: Int) {
         showProgressDialog(activity, getString(R.string.please_wait))
-        client.getNotifications(apiToken!!, page).enqueue(object : Callback<Notification> {
+        client().getNotifications(apiToken!!, page).enqueue(object : Callback<Notification> {
             override fun onResponse(call: Call<Notification>, response: Response<Notification>) {
                 dismissProgressDialog()
                 try {

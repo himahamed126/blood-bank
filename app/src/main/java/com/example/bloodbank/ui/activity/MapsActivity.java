@@ -25,9 +25,8 @@ import butterknife.ButterKnife;
 
 
 import static com.example.bloodbank.data.local.SharedPreferencesManger.SaveData;
-import static com.example.bloodbank.helper.ConstansKt.LATITUDE;
-import static com.example.bloodbank.helper.ConstansKt.LONGITUDE;
-import static com.example.bloodbank.helper.HelperMethods.showToast;
+import static com.example.bloodbank.utils.ConstansKt.LATITUDE;
+import static com.example.bloodbank.utils.ConstansKt.LONGITUDE;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -59,7 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    showToast(MapsActivity.this, currentLocation.getLatitude() + "" + currentLocation.getLongitude());
+//                    MapsActivity.this.createToast();
+//                    showToast(MapsActivity.this, currentLocation.getLatitude() + "" + currentLocation.getLongitude());
                     initMap();
                     SaveData(MapsActivity.this, LATITUDE, currentLocation.getLatitude());
                     SaveData(MapsActivity.this, LONGITUDE, currentLocation.getLongitude());

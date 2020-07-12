@@ -3,7 +3,8 @@ package com.example.bloodbank.ui.activity
 import android.os.Bundle
 import com.example.bloodbank.R
 import com.example.bloodbank.extensions.replaceFragment
-import com.example.bloodbank.ui.fragment.authCycle.LoginFragment
+import com.example.bloodbank.ui.base.BaseActivity
+import com.example.bloodbank.ui.fragment.authCycle.login.LoginFragment
 
 class AuthActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

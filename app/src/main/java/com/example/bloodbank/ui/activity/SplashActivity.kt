@@ -6,7 +6,8 @@ import android.os.Handler
 import com.example.bloodbank.R
 import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.extensions.replaceFragment
-import com.example.bloodbank.helper.FIRST_LAUNCH
+import com.example.bloodbank.ui.base.BaseActivity
+import com.example.bloodbank.utils.FIRST_LAUNCH
 import com.example.bloodbank.ui.fragment.splashCycle.InroFragment
 import com.example.bloodbank.ui.fragment.splashCycle.SplashFragment
 
