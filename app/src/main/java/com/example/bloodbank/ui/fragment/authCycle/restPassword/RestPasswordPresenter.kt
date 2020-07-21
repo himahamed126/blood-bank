@@ -9,10 +9,10 @@ import com.example.bloodbank.extensions.replaceFragment
 import com.example.bloodbank.ui.fragment.authCycle.newPassword.NewPasswordFragment
 import com.example.bloodbank.utils.PHONE
 
-class RestPasswordPresenter(var restPasswordView: RestPasswordContract.View?)
+class RestPasswordPresenter(private var restPasswordView: RestPasswordContract.View?)
     : RestPasswordContract.Presenter, RestPasswordContract.Model.OnFinishedListener {
 
-    var restPasswordModel: RestPasswordModel = RestPasswordModel()
+    private var restPasswordModel: RestPasswordModel = RestPasswordModel()
 
     override fun onDestroy() {
         restPasswordView = null
@@ -30,7 +30,7 @@ class RestPasswordPresenter(var restPasswordView: RestPasswordContract.View?)
             restPasswordView!!.hideProgress()
         }
         if (body.status == 1) {
-            SharedPreferencesManger.SaveData(activity, PHONE, phone)
+            SharedPreferencesManger(activity).setPreference(  PHONE, phone)
             activity.replaceFragment(R.id.activity_auth_fl_content, NewPasswordFragment(), "")
         }
         activity.createToast(body.msg!!)

@@ -1,10 +1,7 @@
 package com.example.bloodbank.extensions
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.widget.Toast
-import com.example.bloodbank.R
-import com.example.bloodbank.utils.HelperMethods
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,8 +26,3 @@ inline fun <T> Call<T>.addEnqueue(
     enqueue(callback)
     return callback
 }
-
-
-
-
-

@@ -17,7 +17,7 @@ class NewPasswordModel : NewPasswordContract.Model {
     ) {
         ApiClient.client().newPassword(
                 newPassword, confirmNewPassword, code,
-                SharedPreferencesManger.LoadData(activity, PHONE)!!
+                SharedPreferencesManger(activity).restoreStringValue(PHONE)!!
         ).addEnqueue(
                 {
                     onFinishedListener.onFinished(it.body()!!, activity)

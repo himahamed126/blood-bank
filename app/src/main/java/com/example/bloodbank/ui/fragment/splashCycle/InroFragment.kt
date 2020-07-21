@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.bloodbank.R
 import com.example.bloodbank.data.local.SharedPreferencesManger
-import com.example.bloodbank.ui.adapter.SliderPagerAdapter
 import com.example.bloodbank.databinding.FragmentInroBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.utils.FIRST_LAUNCH
 import com.example.bloodbank.ui.activity.AuthActivity
+import com.example.bloodbank.ui.adapter.SliderPagerAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
 
 class InroFragment : BaseFragment() {
@@ -49,16 +48,19 @@ class InroFragment : BaseFragment() {
                 binding.fragmentInroCircle1.setImageResource(R.drawable.sh_cir_orange)
                 binding.fragmentInroCircle2.setImageResource(R.drawable.sh_cir_red)
                 binding.fragmentInroCircle3.setImageResource(R.drawable.sh_cir_red)
+                binding.fragmentInroBtnNext.setImageResource(R.drawable.ic_arrow_white)
             }
             1 -> {
                 binding.fragmentInroCircle1.setImageResource(R.drawable.sh_cir_red)
                 binding.fragmentInroCircle2.setImageResource(R.drawable.sh_cir_orange)
                 binding.fragmentInroCircle3.setImageResource(R.drawable.sh_cir_red)
+                binding.fragmentInroBtnNext.setImageResource(R.drawable.ic_arrow_white)
             }
             2 -> {
                 binding.fragmentInroCircle1.setImageResource(R.drawable.sh_cir_red)
                 binding.fragmentInroCircle2.setImageResource(R.drawable.sh_cir_red)
                 binding.fragmentInroCircle3.setImageResource(R.drawable.sh_cir_orange)
+                binding.fragmentInroBtnNext.setImageResource(R.drawable.ic_done)
             }
         }
     }
@@ -66,12 +68,16 @@ class InroFragment : BaseFragment() {
     private fun lunchHomeScreen() {
         binding.fragmentInroBtnNext.setOnClickListener {
             val current = (+1).getItem()
-            if (current < this.layout.size) {
-                binding.fragmentInroVpSlider.currentItem = current
-            } else {
-                SharedPreferencesManger.SaveData(this.activity!!, FIRST_LAUNCH, true)
-                val intent = Intent(activity, AuthActivity::class.java)
-                startActivity(intent)
+
+            when {
+                current < this.layout.size -> {
+                    binding.fragmentInroVpSlider.currentItem = current
+                }
+                else -> {
+                    SharedPreferencesManger.getINSTANCE(requireActivity())!!.setPreference("SEE_SPLASH", true)
+                    val intent = Intent(activity, AuthActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }

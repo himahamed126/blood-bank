@@ -2,7 +2,6 @@
 <layout>
 
     <data>
-
         <variable
             name="item"
             type="com.example.bloodbank.data.model.general.GeneralData" />

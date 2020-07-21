@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="false"
-    android:layoutDirection="rtl"
-    app:layout_scrollFlags="scroll|enterAlways">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        app:elevation="0dp">
+        android:fitsSystemWindows="false"
+        android:layoutDirection="rtl"
+        app:layout_scrollFlags="scroll|enterAlways">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:background="@color/white"
+            app:elevation="0dp">
 
-            <RelativeLayout
-                android:id="@+id/fragment_articles_sp_ly"
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/sh_rect_gray"
-                android:gravity="center"
-                android:layoutDirection="rtl">
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <Spinner
-                    android:id="@+id/fragment_articles_sp"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/fragment_articles_sp_ly"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/sh_rect_gray"
+                    android:gravity="center"
+                    android:layoutDirection="rtl">
 
-                <EditText
-                    android:id="@+id/fragment_articles_ed_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/fragment_articles_btn_search"
-                    android:layout_toEndOf="@id/fragment_articles_sp"
-                    android:background="@null"
-                    android:fontFamily="@font/janna"
-                    android:hint="@string/enter_word_here"
-                    android:textColorHint="@color/red"
-                    android:textSize="14sp" />
+                    <Spinner
+                        android:id="@+id/fragment_articles_sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="4dp" />
 
-                <ImageView
-                    android:id="@+id/fragment_articles_btn_search"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_search" />
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+                    <EditText
+                        android:id="@+id/fragment_articles_ed_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/fragment_articles_btn_search"
+                        android:layout_toEndOf="@id/fragment_articles_sp"
+                        android:background="@null"
+                        android:fontFamily="@font/janna"
+                        android:hint="@string/enter_word_here"
+                        android:textColorHint="@color/red"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/fragment_articles_btn_search"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_search" />
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_articles_rv_articles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layoutAnimation="@anim/layou_animation_left_to_right"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_articles_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layou_animation_left_to_right"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

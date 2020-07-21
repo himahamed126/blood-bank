@@ -1,26 +1,17 @@
 package com.example.bloodbank.ui.dialog
 
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.bloodbank.R
-import com.example.bloodbank.data.api.ApiClient.client
-
-import com.example.bloodbank.data.local.SharedPreferencesManger.LoadData
-import com.example.bloodbank.data.local.SharedPreferencesManger.clean
-import com.example.bloodbank.data.model.general.GeneralResponse
+import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.databinding.DialogLogOutBinding
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.utils.API_TOKEN
-import com.example.bloodbank.utils.FIREBASE_TOKEN
 import com.example.bloodbank.ui.activity.SplashActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LogOutDialog : DialogFragment(), View.OnClickListener {
 
@@ -59,7 +50,7 @@ class LogOutDialog : DialogFragment(), View.OnClickListener {
         when (view.id) {
             R.id.dialog_sign_up_btn_yes -> {
 //                removeFirebaseToken();
-                clean(activity!!)
+                SharedPreferencesManger.getINSTANCE(activity)!!.clean()
                 val intent = Intent(activity, SplashActivity::class.java)
                 startActivity(intent)
             }

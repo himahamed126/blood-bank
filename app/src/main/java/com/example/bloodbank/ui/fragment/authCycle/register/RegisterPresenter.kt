@@ -6,7 +6,6 @@ import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.data.model.login.Login
 import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.ui.activity.HomeActivity
-import com.example.bloodbank.utils.API_TOKEN
 import com.example.bloodbank.utils.PASSWORD
 import com.example.bloodbank.utils.USER_DATA
 
@@ -40,9 +39,9 @@ class RegisterPresenter(var registerView: RegisterContract.View?) :
             registerView!!.hideProgress()
         }
         if (body.status == 1) {
-            SharedPreferencesManger.SaveData(activity, API_TOKEN, body.data!!.apiToken)
-            SharedPreferencesManger.SaveData(activity, USER_DATA, body.data)
-            SharedPreferencesManger.SaveData(activity, PASSWORD, password)
+            SharedPreferencesManger(activity).setPreference("API_TOKEN", body.data!!.apiToken!!)
+            SharedPreferencesManger(activity).setPreference(USER_DATA, body.data!!)
+            SharedPreferencesManger(activity).setPreference(PASSWORD, password)
             activity.startActivity(Intent(activity, HomeActivity::class.java))
         }
         activity.createToast(body.msg!!)

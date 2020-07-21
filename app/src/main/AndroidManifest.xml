@@ -15,6 +15,7 @@
     <application
         android:name=".Application"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -26,14 +27,18 @@
         <activity android:name=".ui.activity.HomeActivity">
 
         </activity>
-        <activity android:name=".ui.activity.AuthActivity">
+        <activity
+            android:name=".ui.activity.AuthActivity"
+            android:noHistory="true">
+
+        </activity>
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.activity.SplashActivity">
-
         </activity>
         <activity android:name=".ui.activity.MapsActivity"></activity>
 

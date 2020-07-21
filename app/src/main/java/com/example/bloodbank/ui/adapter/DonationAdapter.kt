@@ -16,7 +16,7 @@ import com.example.bloodbank.data.model.donations.DonationData
 import com.example.bloodbank.databinding.ItemDonationRequestBinding
 import com.example.bloodbank.extensions.addFragment
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.ui.fragment.homeCycle.donations.DonationDetailsFragment
+import com.example.bloodbank.ui.fragment.homeCycle.donations.preview_donation.DonationDetailsFragment
 
 class DonationAdapter(private val context: Context, private val donationsList: MutableList<DonationData>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {

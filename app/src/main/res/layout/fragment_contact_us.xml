@@ -127,59 +127,67 @@
                     android:layout_marginTop="16dp"
                     android:layoutDirection="rtl">
 
-                    <androidx.constraintlayout.widget.Guideline
+                    <View
                         android:id="@+id/fragment_contact_us_gl_ver"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/fragment_contact_us_gl_hor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.5" />
-
-                    <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="6dp"
                         android:layout_height="0dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_insta"
-                        app:layout_constraintBottom_toBottomOf="@id/fragment_contact_us_gl_hor"
-                        app:layout_constraintEnd_toEndOf="@id/fragment_contact_us_gl_ver"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/fragment_contact_us_gl_hor"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/fragment_contact_us_iv_insta"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_insta"
+                        app:layout_constraintBottom_toTopOf="@id/fragment_contact_us_gl_hor"
+                        app:layout_constraintEnd_toStartOf="@id/fragment_contact_us_gl_ver"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/fragment_contact_us_iv_fb"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_facebook"
-                        app:layout_constraintBottom_toBottomOf="@id/fragment_contact_us_gl_hor"
+                        app:layout_constraintBottom_toTopOf="@id/fragment_contact_us_gl_hor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/fragment_contact_us_gl_ver"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/fragment_contact_us_iv_youtube"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_youtube"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/fragment_contact_us_gl_ver"
+                        app:layout_constraintEnd_toStartOf="@id/fragment_contact_us_gl_ver"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fragment_contact_us_gl_hor" />
+                        app:layout_constraintTop_toBottomOf="@id/fragment_contact_us_gl_hor" />
 
                     <ImageView
+                        android:id="@+id/fragment_contact_us_iv_twitter"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img_twiter"
+                        android:src="@drawable/img_twitter"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/fragment_contact_us_gl_ver"
-                        app:layout_constraintTop_toTopOf="@id/fragment_contact_us_gl_hor" />
+                        app:layout_constraintStart_toEndOf="@id/fragment_contact_us_gl_ver"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_contact_us_gl_hor" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText

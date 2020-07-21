@@ -1,21 +1,32 @@
 package com.example.bloodbank
 
 import android.app.Application
-import com.example.bloodbank.ui.viewModels.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class Application : Application() {
+open class Application : Application() {
+
     override fun onCreate() {
         super.onCreate()
 
-        val modules = listOf(
-                viewModelModule
-        )
+        if (instance == null) {
+            instance = this
+        }
+
 
         startKoin {
             androidContext(this@Application)
-            modules(modules)
+//            modules(modules)
         }
     }
+
+    companion object {
+
+        private var instance: com.example.bloodbank.Application? = null
+
+        fun getInstance(): com.example.bloodbank.Application? {
+            return instance
+        }
+    }
+
 }

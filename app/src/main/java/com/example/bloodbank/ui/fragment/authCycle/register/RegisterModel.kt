@@ -23,7 +23,7 @@ class RegisterModel : RegisterContract.Model {
                     if (it.body()!!.status == 1) {
                         onFinishedListener.onFinished(it.body()!!, password, activity)
                     } else {
-                        onFinishedListener.onFailure(it.message())
+                        onFinishedListener.onFailure(it.body()!!.msg.toString())
                     }
                 },
                 {

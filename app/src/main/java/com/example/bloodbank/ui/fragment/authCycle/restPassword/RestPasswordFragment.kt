@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bloodbank.R
-import com.example.bloodbank.data.local.SharedPreferencesManger.setSharedPreferences
 import com.example.bloodbank.databinding.FragmentRestPasswordBinding
 import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
@@ -26,7 +25,6 @@ class RestPasswordFragment : BaseFragment(), RestPasswordContract.View, View.OnC
         restPasswordPresenter = RestPasswordPresenter(this)
         loadingDialog = LoadingDialog(requireActivity())
 
-        setSharedPreferences(requireActivity())
         binding.fragmentRestPasswordBtnSend.setOnClickListener(this)
         return binding.root
     }

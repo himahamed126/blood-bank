@@ -21,7 +21,7 @@ fun setArticleImage(
         recycled: Boolean = false
 ) {
     view.clipToOutline = true
-    val drawable = getDrawable(view.context,R.color.deep_gray)
+    val drawable = getDrawable(view.context, R.color.deep_gray)
 
     Glide.with(view)
             .load(imagePath)
@@ -52,8 +52,8 @@ fun setArticleImage(
 @BindingAdapter("app:isFav")
 fun setFavoriteToggle(view: ImageView, isFav: Boolean) {
     if (isFav) {
-        view.setImageDrawable(getDrawable(view.context, R.drawable.ic_favorite_fill_red))
+        view.setImageDrawable(getDrawable(view.context, R.drawable.ic_star_fill))
     } else {
-        view.setImageDrawable(getDrawable(view.context, R.drawable.ic_favorite_border))
+        view.setImageDrawable(getDrawable(view.context, R.drawable.ic_star_border))
     }
 }

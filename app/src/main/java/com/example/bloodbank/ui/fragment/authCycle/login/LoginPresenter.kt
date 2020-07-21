@@ -6,7 +6,6 @@ import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.data.model.login.Login
 import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.ui.activity.HomeActivity
-import com.example.bloodbank.utils.API_TOKEN
 import com.example.bloodbank.utils.IS_REMEMBER
 import com.example.bloodbank.utils.PASSWORD
 import com.example.bloodbank.utils.USER_DATA
@@ -35,10 +34,11 @@ class LoginPresenter(var loginView: LoginContract.View?) : LoginContract.Present
             loginView!!.hideProgress()
         }
         if (body.status == 1) {
-            SharedPreferencesManger.SaveData(activity, API_TOKEN, body.data!!.apiToken)
-            SharedPreferencesManger.SaveData(activity, USER_DATA, body.data)
-            SharedPreferencesManger.SaveData(activity, PASSWORD, password)
-            SharedPreferencesManger.SaveData(activity, IS_REMEMBER, remember)
+
+            SharedPreferencesManger.getINSTANCE(activity)!!.setPreference("API_TOKEN", body.data!!.apiToken!!)
+            SharedPreferencesManger.getINSTANCE(activity)!!.setPreference(USER_DATA, body.data!!)
+            SharedPreferencesManger.getINSTANCE(activity)!!.setPreference(PASSWORD, password)
+            SharedPreferencesManger.getINSTANCE(activity)!!.setPreference(IS_REMEMBER, remember)
             activity.startActivity(Intent(activity, HomeActivity::class.java))
 //          registerNotificationToken(it.body().getData().getApiToken());
         }

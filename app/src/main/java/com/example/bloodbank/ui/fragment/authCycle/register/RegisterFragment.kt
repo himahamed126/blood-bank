@@ -7,18 +7,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import com.example.bloodbank.R
-import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.data.api.ApiClient.client
-import com.example.bloodbank.data.local.SharedPreferencesManger
 import com.example.bloodbank.databinding.FragmentRegisterBinding
 import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
 import com.example.bloodbank.extensions.replaceFragment
-import com.example.bloodbank.utils.DateModel
-import com.example.bloodbank.utils.HelperMethods
+import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
 import com.example.bloodbank.ui.fragment.authCycle.login.LoginFragment
 import com.example.bloodbank.ui.views.LoadingDialog
+import com.example.bloodbank.utils.DateModel
+import com.example.bloodbank.utils.HelperMethods
 
 class RegisterFragment : BaseFragment(), RegisterContract.View, View.OnClickListener {
 
@@ -33,7 +32,6 @@ class RegisterFragment : BaseFragment(), RegisterContract.View, View.OnClickList
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setupActivity()
         binding = inflater.inflateWithBinding(R.layout.fragment_register, container)
-        SharedPreferencesManger.setSharedPreferences(this.requireActivity())
         registerPresenter = RegisterPresenter(this)
         loadingDialog = LoadingDialog(activity)
 
@@ -41,7 +39,7 @@ class RegisterFragment : BaseFragment(), RegisterContract.View, View.OnClickList
         bloodTypeAdapter = GeneralResponseAdapter(activity)
         HelperMethods.getSpinnerCityData2(client().getbloodTypes(), bloodTypeAdapter!!, binding.fragmentRegisterSpBloodType, getString(R.string.blood_type), activity)
         governorateAdapter = GeneralResponseAdapter(activity)
-        HelperMethods.getSpinnerCityData(client().governorates, governorateAdapter!!, binding.fragmentRegisterSpGovernorate,
+        HelperMethods.setSpinnerWithListener(client().governorates, governorateAdapter!!, binding.fragmentRegisterSpGovernorate,
                 getString(R.string.governorate), 0, object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 cityAdapter = GeneralResponseAdapter(activity)

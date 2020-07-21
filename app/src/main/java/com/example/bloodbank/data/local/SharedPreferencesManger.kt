@@ -1,89 +1,91 @@
 package com.example.bloodbank.data.local
 
-import android.app.Activity
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.bloodbank.data.model.login.ClientData
+import com.example.bloodbank.utils.API_TOKEN
 import com.example.bloodbank.utils.USER_DATA
 import com.google.gson.Gson
 
-object SharedPreferencesManger {
+open class SharedPreferencesManger(var context: Context) {
     private var sharedPreferences: SharedPreferences? = null
 
-    fun setSharedPreferences(activity: Activity) {
+    init {
         if (sharedPreferences == null) {
-            sharedPreferences = activity.getSharedPreferences(
-                    "Blood", Context.MODE_PRIVATE)
+            sharedPreferences = context.getSharedPreferences(
+                    "MyBlood", MODE_PRIVATE)
         }
     }
 
-    fun SaveData(activity: Activity, data_Key: String?, data_Value: String?) {
-        if (sharedPreferences != null) {
-            val editor = sharedPreferences!!.edit()
-            editor.putString(data_Key, data_Value)
-            editor.commit()
-        } else {
-            setSharedPreferences(activity)
+    companion object {
+        private var INSTANCE: SharedPreferencesManger? = null
+
+        fun getINSTANCE(context: Context?): SharedPreferencesManger? {
+            if (INSTANCE == null) {
+                INSTANCE = SharedPreferencesManger(context!!)
+            }
+            return INSTANCE
         }
     }
 
-    fun SaveData(activity: Activity, data_Key: String?, data_Value: Boolean) {
-        if (sharedPreferences != null) {
-            val editor = sharedPreferences!!.edit()
-            editor.putBoolean(data_Key, data_Value)
-            editor.commit()
-        } else {
-            setSharedPreferences(activity)
-        }
-    }
 
-    @kotlin.jvm.JvmStatic
-    fun LoadData(activity: Activity, data_Key: String?): String? {
-        if (sharedPreferences != null) {
-            val editor = sharedPreferences!!.edit()
-        } else {
-            setSharedPreferences(activity)
-        }
-        return sharedPreferences!!.getString(data_Key, null)
-    }
-
-    fun LoadBoolean(activity: Activity, data_Key: String?): Boolean {
-        if (sharedPreferences != null) {
-            val editor = sharedPreferences!!.edit()
-        } else {
-            setSharedPreferences(activity)
-        }
-        return sharedPreferences!!.getBoolean(data_Key, false)
-    }
-
-    @kotlin.jvm.JvmStatic
-    fun SaveData(activity: Activity, data_Key: String?, data_Value: Any?) {
-        setSharedPreferences(activity)
-        if (sharedPreferences != null) {
-            val editor = sharedPreferences!!.edit()
-            val gson = Gson()
-            val StringData = gson.toJson(data_Value)
-            editor.putString(data_Key, StringData)
-            editor.commit()
-        }
-    }
-
-    @kotlin.jvm.JvmStatic
-    fun loadUserData(activity: Activity): ClientData? {
-        setSharedPreferences(activity)
-        var loginData: ClientData? = null
+    fun loadUserData(): ClientData? {
+        val loginData: ClientData?
         val gson = Gson()
-        loginData = gson.fromJson(LoadData(activity, USER_DATA), ClientData::class.java)
+        loginData = gson.fromJson(restoreStringValue(USER_DATA), ClientData::class.java)
         return loginData
     }
 
-    @kotlin.jvm.JvmStatic
-    fun clean(activity: Activity) {
-        setSharedPreferences(activity)
+    fun clean() {
+        getINSTANCE(context)
         if (sharedPreferences != null) {
             val editor = sharedPreferences!!.edit()
             editor.clear()
-            editor.commit()
+            editor.apply()
         }
+    }
+
+    fun setPreference(key: String, value: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+
+    fun getApiToken(): String {
+        return sharedPreferences!!.getString(API_TOKEN, "")!!
+    }
+
+    fun setPreference(key: String, value: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+        editor.putInt(key, value)
+        editor.apply()
+    }
+
+    fun setPreference(key: String, value: Boolean) {
+        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+        editor.putBoolean(key, value)
+        editor.apply()
+    }
+
+    fun setPreference(key: String, value: Any) {
+        val editor: SharedPreferences.Editor = sharedPreferences!!.edit()
+        val gson = Gson()
+        val stringData: String = gson.toJson(value)
+        editor.putString(key, stringData)
+        editor.apply()
+    }
+
+    open fun restoreStringValue(key: String?): String? {
+        return sharedPreferences!!.getString(key, "Empty")
+    }
+
+    fun restoreIntValue(key: String?): Int? {
+        return sharedPreferences!!.getInt(key, 0)
+    }
+
+    fun restoreBooleanValue(key: String?): Boolean? {
+        return sharedPreferences!!.getBoolean(key, false)
     }
 }

@@ -8,10 +8,11 @@ import com.example.bloodbank.R
 import com.example.bloodbank.databinding.FragmentMoreBinding
 import com.example.bloodbank.extensions.addFragment
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.extensions.addFragment
 import com.example.bloodbank.ui.dialog.LogOutDialog
 import com.example.bloodbank.ui.fragment.BaseFragment
-import com.example.bloodbank.ui.fragment.homeCycle.notifications.NotificationSettingsFragment
+import com.example.bloodbank.ui.fragment.homeCycle.more.contact_us.ContactUsFragment
+import com.example.bloodbank.ui.fragment.homeCycle.more.favorite.FavoriteFragment
+import com.example.bloodbank.ui.fragment.homeCycle.more.notification_settings.NotificationSettingsFragment
 
 class MoreFragment : BaseFragment(), View.OnClickListener {
 
@@ -38,9 +39,8 @@ class MoreFragment : BaseFragment(), View.OnClickListener {
             R.id.fragment_more_btn_rate_on_store -> {}
             R.id.fragment_more_btn_notification_settings -> activity.addFragment(R.id.activity_home_fl_content, NotificationSettingsFragment())
             R.id.fragment_more_btn_log_out -> {
-                val fragmentManager = fragmentManager
                 val logOutDialog = LogOutDialog()
-                logOutDialog.show(fragmentManager!!, "logout")
+                logOutDialog.show(requireFragmentManager(), "logout")
             }
         }
     }

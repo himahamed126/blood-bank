@@ -20,22 +20,6 @@ class CheckBoxAdapter(private val generalDataList: MutableList<GeneralData>, pri
         (holder as CheckBoxViewHolder).bind()
     }
 
-//    private fun setAction(holderCheckBox: CheckBoxViewHolder, position: Int) {
-//        val data = generalDataList[position]
-//        holderCheckBox.itemCheckBoxCh!!.setOnCheckedChangeListener { buttonView, isChecked ->
-//            if (isChecked) {
-//                for (i in newIds.indices) {
-//                    if (data.id == newIds[i]) {
-//                        newIds.removeAt(i)
-//                        break
-//                    }
-//                }
-//            } else {
-//                newIds.add(data.id)
-//            }
-//        }
-//    }
-
     override fun getItemCount(): Int {
         return generalDataList.size
     }
@@ -52,6 +36,20 @@ class CheckBoxAdapter(private val generalDataList: MutableList<GeneralData>, pri
                 }
                 this.item = data
                 executePendingBindings()
+
+                binding.itemCheckBoxCh.setOnCheckedChangeListener { _, isChecked ->
+                    if (!isChecked) {
+                        for (i in newIds.indices) {
+                            if (newIds[i] == data.id) {
+                                newIds.removeAt(i)
+                                break
+                            }
+                        }
+                    } else {
+                        newIds.add(data.id)
+                    }
+                }
+
             }
         }
     }

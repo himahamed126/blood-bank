@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bloodbank.R
-import com.example.bloodbank.ui.adapter.ViewPagerAdapter
 import com.example.bloodbank.databinding.FragmentHomeBinding
 import com.example.bloodbank.extensions.addFragment
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.extensions.replaceFragment
+import com.example.bloodbank.ui.adapter.ViewPagerAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
-import com.example.bloodbank.ui.fragment.authCycle.login.LoginFragment
 import com.example.bloodbank.ui.fragment.homeCycle.articles.ArticleFragment
-import com.example.bloodbank.ui.fragment.homeCycle.donations.AddDonationFragment
-import com.example.bloodbank.ui.fragment.homeCycle.donations.DonationFragment
+import com.example.bloodbank.ui.fragment.homeCycle.donations.add_donation.AddDonationFragment
+import com.example.bloodbank.ui.fragment.homeCycle.donations.preview_donation.DonationFragment
 
 class HomeFragment : BaseFragment(), View.OnClickListener {
 
@@ -27,8 +25,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
         val viewPagerAdapter = ViewPagerAdapter(childFragmentManager)
         val articleFragment = ArticleFragment()
         val donationFragment = DonationFragment()
-        viewPagerAdapter.addPager(articleFragment, getString(R.string.articles))
         viewPagerAdapter.addPager(donationFragment, getString(R.string.donation_request))
+        viewPagerAdapter.addPager(articleFragment, getString(R.string.articles))
         binding.fragmentHomeVpViewPager.adapter = viewPagerAdapter
         binding.fragmentHomeTblTabLayout.setupWithViewPager(binding.fragmentHomeVpViewPager)
         binding.fragmentArticlesFabAdd.setOnClickListener(this)
@@ -42,6 +40,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onBack() {
-        activity.replaceFragment(R.id.activity_home_fl_content, LoginFragment())
+        requireActivity().finish()
     }
 }

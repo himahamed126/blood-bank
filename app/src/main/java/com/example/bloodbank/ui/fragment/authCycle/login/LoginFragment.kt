@@ -33,7 +33,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, CompoundButton.OnChe
 
         loginPresenter = LoginPresenter(this)
 
-        if (SharedPreferencesManger.LoadBoolean(requireActivity(), IS_REMEMBER)) {
+        if (SharedPreferencesManger.getINSTANCE(activity)!!.restoreBooleanValue(IS_REMEMBER) == true) {
             requireActivity().startActivity(Intent(activity, HomeActivity::class.java))
         }
         initUi()

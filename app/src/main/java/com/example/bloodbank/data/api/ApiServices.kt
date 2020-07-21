@@ -1,9 +1,9 @@
 package com.example.bloodbank.data.api
 
-import com.example.bloodbank.data.model.general.GeneralResponse
 import com.example.bloodbank.data.model.articles.Articles
 import com.example.bloodbank.data.model.contactUs.ContactUs
 import com.example.bloodbank.data.model.donations.Donations
+import com.example.bloodbank.data.model.general.GeneralResponse
 import com.example.bloodbank.data.model.login.Login
 import com.example.bloodbank.data.model.notificationSettings.NotificationSettings
 import com.example.bloodbank.data.model.notifications.Notification
@@ -128,4 +128,17 @@ interface ApiServices {
     fun contactUs(@Field("api_token") api_token: String,
                   @Field("title") title: String,
                   @Field("message") message: String): Call<ContactUs>
+
+    @POST("profile")
+    @FormUrlEncoded
+    fun editProfileData(@Field("name") name: String,
+                        @Field("email") email: String,
+                        @Field("birth_date") birth_date: String,
+                        @Field("city_id") city_id: Int,
+                        @Field("phone") phone: String,
+                        @Field("donation_last_date") donation_last_date: String,
+                        @Field("password") password: String,
+                        @Field("password_confirmation") password_confirmation: String,
+                        @Field("blood_type_id") blood_type_id: Int,
+                        @Field("api_token") api_token: String): Call<Login>
 }

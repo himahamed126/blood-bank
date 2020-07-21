@@ -46,8 +46,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/sh_et_bg"
                 android:hint="@string/phone"
-                android:layoutDirection="rtl"
-                android:text="01126545826" />
+                android:layoutDirection="rtl" />
 
             <EditText
                 android:id="@+id/fragment_login_ed_password"
@@ -55,8 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/password"
-                android:text="123456" />
+                android:hint="@string/password" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

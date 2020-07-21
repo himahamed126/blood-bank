@@ -1,70 +1,98 @@
 package com.example.bloodbank.ui.fragment.homeCycle.notifications
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bloodbank.R
-import com.example.bloodbank.data.api.ApiClient.client
-import com.example.bloodbank.data.local.SharedPreferencesManger.LoadData
-import com.example.bloodbank.data.model.notifications.Notification
 import com.example.bloodbank.data.model.notifications.NotificationData
 import com.example.bloodbank.databinding.FragmentNotificationBinding
+import com.example.bloodbank.extensions.createToast
 import com.example.bloodbank.extensions.inflateWithBinding
-import com.example.bloodbank.utils.API_TOKEN
-import com.example.bloodbank.utils.HelperMethods.dismissProgressDialog
-import com.example.bloodbank.utils.HelperMethods.showProgressDialog
 import com.example.bloodbank.ui.adapter.NotificationAdapter
 import com.example.bloodbank.ui.fragment.BaseFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.bloodbank.ui.views.LoadingDialog
+import com.example.bloodbank.utils.API_TOKEN
 
-class NotificationFragment : BaseFragment() {
+class NotificationFragment : BaseFragment(), NotificationContract.View {
 
-    private var notificationData: MutableList<NotificationData>? = null
-    private var notificationAdapter: NotificationAdapter? = null
-    private val TAG = "notification"
-    private var apiToken: String? = null
     lateinit var binding: FragmentNotificationBinding
+    private var notificationData: MutableList<NotificationData> = mutableListOf()
+    private lateinit var notificationAdapter: NotificationAdapter
+    private lateinit var apiToken: String
+
+    lateinit var notificationPresenter: NotificationPresenter
+    lateinit var loadingDialog: LoadingDialog
+
+    lateinit var linearLayoutManager: LinearLayoutManager
+    private var pageNo = 1
+    private var previousTotal: Int = 0
+    private var visibleThreshold: Int = 5
+    var loading: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setupActivity()
         binding = inflater.inflateWithBinding(R.layout.fragment_notification, container)
-        apiToken = LoadData(activity!!, API_TOKEN)
-        getNotification(1)
-        initRecycler()
+        notificationPresenter = NotificationPresenter(this)
+        init()
+        notificationPresenter.requestDataFromServer(apiToken)
+        setListener()
         return binding.root
     }
 
-    private fun initRecycler() {
-        notificationData = mutableListOf()
-        val linearLayoutManager = LinearLayoutManager(activity)
-        notificationAdapter = NotificationAdapter(notificationData!!)
-        binding.fragmentNotificationRv.layoutManager = linearLayoutManager
-        binding.fragmentNotificationRv.adapter = notificationAdapter
+    private fun init() {
+        apiToken = API_TOKEN!!
+        loadingDialog = LoadingDialog(activity)
+
+        notificationAdapter = NotificationAdapter(notificationData)
+        linearLayoutManager = LinearLayoutManager(activity)
+        binding.rvNotificationList.layoutManager = linearLayoutManager
+        binding.rvNotificationList.adapter = notificationAdapter
     }
 
-    private fun getNotification(page: Int) {
-        showProgressDialog(activity, getString(R.string.please_wait))
-        client().getNotifications(apiToken!!, page).enqueue(object : Callback<Notification> {
-            override fun onResponse(call: Call<Notification>, response: Response<Notification>) {
-                dismissProgressDialog()
-                try {
-                    if (response.body()!!.status == 1) {
-                        notificationData!!.addAll(response.body()!!.data!!.data!!)
-                        notificationAdapter!!.notifyDataSetChanged()
-                    } else {
-                        Log.i(TAG, response.body()!!.msg.toString())
+    private fun setListener() {
+
+        binding.rvNotificationList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val visibleItemCount = binding.rvNotificationList.childCount
+                val totalItemCount = linearLayoutManager.itemCount
+                val firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition()
+
+
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false
+                        previousTotal = totalItemCount
                     }
-                } catch (e: Exception) {
-                    Log.i(TAG, e.message.toString())
+                }
+                if (!loading && totalItemCount - visibleItemCount
+                        <= firstVisibleItem + visibleThreshold) {
+                    notificationPresenter.getMoreData(apiToken, pageNo)
+                    loading = true
                 }
             }
-
-            override fun onFailure(call: Call<Notification>, t: Throwable) {}
         })
+    }
+
+    override fun showProgress() {
+        loadingDialog.startLoadingDialog(getString(R.string.please_wait))
+    }
+
+    override fun hideProgress() {
+        loadingDialog.dismissDialog()
+    }
+
+    override fun onResponseFailure(message: String) {
+        requireActivity().createToast(message)
+    }
+
+    override fun setDataToRecyclerView(notificationList: MutableList<NotificationData>) {
+        notificationData.addAll(notificationList)
+        notificationAdapter.notifyDataSetChanged()
+        pageNo++
     }
 }

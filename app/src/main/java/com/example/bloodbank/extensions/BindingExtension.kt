@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.example.bloodbank.databinding.FragmentNotificationBinding
 
 fun <T : ViewDataBinding> LayoutInflater.inflateWithBinding(
         @LayoutRes layoutRes: Int,
