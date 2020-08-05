@@ -1,7 +1,7 @@
 # blood-bank
 
 
-## **Kotlin + Databinding + MVP + Retrofit + Glide + Material Design**
+## **Kotlin + Databinding + MVP + Retrofit + Rxjava + Glide + Material Design**
 
 
 Complete Donation App built based on Material Designe and with the latest Android Development Tools.
