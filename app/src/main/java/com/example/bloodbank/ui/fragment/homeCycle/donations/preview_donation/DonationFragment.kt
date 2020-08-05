@@ -38,6 +38,7 @@ class DonationFragment : BaseFragment(), DonationContract.View {
     private var previousTotal: Int = 0
     private var visibleThreshold: Int = 5
     var loading: Boolean = true
+    var first: Boolean = true
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -79,11 +80,19 @@ class DonationFragment : BaseFragment(), DonationContract.View {
                             API_TOKEN!!, position,
                             binding.fragmentDonationSpCity.selectedItemPosition, pageNo
                             , activity!!)
-
+                    first = false
+                } else if (position == 0) {
+                    if (!first) {
+                        donationsList?.clear()
+                        donationAdapter.notifyDataSetChanged()
+                        donationPresenter.getMoreData(API_TOKEN!!, pageNo)
+                    }
+                    first = true
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
+
             }
         })
 
@@ -139,5 +148,9 @@ class DonationFragment : BaseFragment(), DonationContract.View {
 
     override fun onBack() {
         requireActivity().onBackPressed()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

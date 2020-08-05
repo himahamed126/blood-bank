@@ -15,12 +15,13 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.bloodbank.data.model.general.GeneralData
 import com.example.bloodbank.data.model.general.GeneralResponse
-import com.example.bloodbank.extensions.addEnqueue
 import com.example.bloodbank.ui.adapter.GeneralResponseAdapter
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import org.ocpsoft.prettytime.PrettyTime
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
@@ -29,64 +30,77 @@ import java.util.*
 object HelperMethods {
 
     @JvmStatic
-    fun setSpinnerWithListener(call: Call<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
+    fun setSpinnerWithListener(observable: Observable<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
                                hint: String?, id: Int, listener: OnItemSelectedListener?) {
-        call.addEnqueue(
-                {
-                    try {
-                        if (it.body()!!.status == 1) {
-                            spinnerAdapter.setData(it.body()!!.data as MutableList<GeneralData>, hint)
-                            spinner.adapter = spinnerAdapter
-                            if (id != 0) {
-                                spinner.setSelection(id)
-                            }
-                            spinner.onItemSelectedListener = listener
-                        }
-                    } catch (e: Exception) {
-                    }
-                },
-                {
 
-                }
-        )
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<GeneralResponse> {
+                    override fun onComplete() {
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
+                    override fun onError(it: Throwable) {
+                    }
+
+                    override fun onNext(it: GeneralResponse) {
+                        spinnerAdapter.setData(it.data as MutableList<GeneralData>, hint)
+                        spinner.adapter = spinnerAdapter
+                        if (id != 0) {
+                            spinner.setSelection(id)
+                        }
+                        spinner.onItemSelectedListener = listener
+                    }
+                })
     }
 
-    @JvmStatic
-    fun getSpinnerCityData2(call: Call<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
+    fun getSpinnerCityData2(observable: Observable<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
                             hint: String?, activity: Activity?) {
-        call.enqueue(object : Callback<GeneralResponse> {
-            override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
-                try {
-                    if (response.body()!!.status == 1) {
-                        spinnerAdapter.setData(response.body()!!.data as MutableList<GeneralData>, hint)
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<GeneralResponse> {
+                    override fun onComplete() {
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
+                    override fun onError(it: Throwable) {
+                    }
+
+                    override fun onNext(it: GeneralResponse) {
+                        spinnerAdapter.setData(it.data as MutableList<GeneralData>, hint)
                         spinner.adapter = spinnerAdapter
                     }
-                } catch (e: Exception) {
-                }
-            }
-
-            override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {}
-        })
+                })
     }
 
-    fun getSpinnerWithSelection(call: Call<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
+    fun getSpinnerWithSelection(observable: Observable<GeneralResponse>, spinnerAdapter: GeneralResponseAdapter, spinner: Spinner,
                                 hint: String?, id: Int) {
-        call.enqueue(object : Callback<GeneralResponse> {
-            override fun onResponse(call: Call<GeneralResponse>, response: Response<GeneralResponse>) {
-                try {
-                    if (response.body()!!.status == 1) {
-                        spinnerAdapter.setData(response.body()!!.data as MutableList<GeneralData>, hint)
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<GeneralResponse> {
+                    override fun onComplete() {
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
+                    override fun onError(it: Throwable) {
+                    }
+
+                    override fun onNext(it: GeneralResponse) {
+                        spinnerAdapter.setData(it.data as MutableList<GeneralData>, hint)
                         spinner.adapter = spinnerAdapter
                         if (id != 0) {
                             spinner.setSelection(id)
                         }
                     }
-                } catch (e: Exception) {
-                }
-            }
-
-            override fun onFailure(call: Call<GeneralResponse>, t: Throwable) {}
-        })
+                })
     }
 
     @JvmStatic

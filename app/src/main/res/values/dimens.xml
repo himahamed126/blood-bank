@@ -2,4 +2,5 @@
 <resources>
     <dimen name="details_m_t">12dp</dimen>
     <dimen name="details_m_s_e">8dp</dimen>
+    <dimen name="item_donation_tv_s_size">13sp</dimen>
 </resources>

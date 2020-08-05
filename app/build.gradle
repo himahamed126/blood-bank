@@ -53,10 +53,10 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    //Retrofit Dependenciesciri
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.okhttp:okhttp:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
@@ -81,9 +81,12 @@ dependencies {
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
     implementation 'org.koin:koin-androidx-scope:2.0.1'
 
-    // rx
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation "io.reactivex.rxjava2:rxjava:${versions.rxjava2Version}"
+//rx
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+
 
     implementation "com.trello.rxlifecycle4:rxlifecycle:${versions.rxlifecycleVersion}"
     implementation "com.trello.rxlifecycle4:rxlifecycle-android:${versions.rxlifecycleVersion}"

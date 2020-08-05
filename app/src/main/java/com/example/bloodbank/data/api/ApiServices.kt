@@ -9,7 +9,7 @@ import com.example.bloodbank.data.model.notificationSettings.NotificationSetting
 import com.example.bloodbank.data.model.notifications.Notification
 import com.example.bloodbank.data.model.postToggle.PostToggle
 import com.example.bloodbank.data.model.restPassword.RestPassword
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.*
 
 interface ApiServices {
@@ -23,61 +23,61 @@ interface ApiServices {
                @Field("donation_last_date") donation_last_date: String,
                @Field("password") password: String,
                @Field("password_confirmation") password_confirmation: String,
-               @Field("blood_type_id") blood_type_id: Int): Call<Login>
+               @Field("blood_type_id") blood_type_id: Int): Observable<Login>
 
     @POST("login")
     @FormUrlEncoded
     fun login(@Field("phone") phone: String,
-              @Field("password") password: String): Call<Login>
+              @Field("password") password: String): Observable<Login>
 
 
     @get:GET("governorates")
-    val governorates: Call<GeneralResponse>
+    val governorates: Observable<GeneralResponse>
 
     @GET("cities")
-    fun getCities(@Query("governorate_id") governorate_id: Int): Call<GeneralResponse>
+    fun getCities(@Query("governorate_id") governorate_id: Int): Observable<GeneralResponse>
 
     @GET("blood-types")
-    fun getbloodTypes(): Call<GeneralResponse>
+    fun getbloodTypes(): Observable<GeneralResponse>
 
     @POST("reset-password")
     @FormUrlEncoded
-    fun resetPassword(@Field("phone") phone: String): Call<RestPassword>
+    fun resetPassword(@Field("phone") phone: String): Observable<RestPassword>
 
     @POST("new-password")
     @FormUrlEncoded
     fun newPassword(@Field("password") password: String,
                     @Field("password_confirmation") password_confirmation: String,
                     @Field("pin_code") pin_code: String,
-                    @Field("phone") phone: String): Call<RestPassword>
+                    @Field("phone") phone: String): Observable<RestPassword>
 
     @GET("posts")
     fun getArticles(@Query("api_token") api_token: String,
-                    @Query("page") page: Int): Call<Articles>
+                    @Query("page") page: Int): Observable<Articles>
 
     @POST("post-toggle-favourite")
     @FormUrlEncoded
     fun postToggleFavourite(@Field("post_id") post_id: Int,
-                            @Field("api_token") api_token: String): Call<PostToggle>
+                            @Field("api_token") api_token: String): Observable<PostToggle>
 
     @GET("posts")
     fun getArticlesWithFilter(@Query("api_token") api_token: String,
                               @Query("page") page: Int,
                               @Query("keyword") keyword: String,
-                              @Query("category_id") category_id: Int): Call<Articles>
+                              @Query("category_id") category_id: Int): Observable<Articles>
 
     @get:GET("categories")
-    val categories: Call<GeneralResponse>
+    val categories: Observable<GeneralResponse>
 
     @GET("donation-requests")
     fun getAllDonation(@Query("api_token") api_token: String,
-                       @Query("page") page: Int): Call<Donations>
+                       @Query("page") page: Int): Observable<Donations>
 
     @GET("donation-requests")
     fun getAllDonationWithFilter(@Query("api_token") api_token: String,
                                  @Query("blood_type_id") blood_type_id: Int,
                                  @Query("city_id") city_id: Int,
-                                 @Query("page") page: Int): Call<Donations>
+                                 @Query("page") page: Int): Observable<Donations>
 
     @POST("donation-request/create")
     @FormUrlEncoded
@@ -92,42 +92,42 @@ interface ApiServices {
                            @Field("phone") phone: String,
                            @Field("notes") notes: String,
                            @Field("latitude") latitude: String,
-                           @Field("longitude") longitude: String): Call<Donations>
+                           @Field("longitude") longitude: String): Observable<Donations>
 
     @GET("my-favourites")
     fun getFavoriteArticles(@Query("api_token") api_token: String,
-                            @Query("page") page: Int): Call<Articles>
+                            @Query("page") page: Int): Observable<Articles>
 
     @GET("notifications")
     fun getNotifications(@Query("api_token") api_token: String,
-                         @Query("page") page: Int): Call<Notification>
+                         @Query("page") page: Int): Observable<Notification>
 
     @POST("notifications-settings")
     @FormUrlEncoded
-    fun getNotificationSettings(@Field("api_token") api_token: String): Call<NotificationSettings>
+    fun getNotificationSettings(@Field("api_token") api_token: String): Observable<NotificationSettings>
 
     @POST("notifications-settings")
     @FormUrlEncoded
     fun changeNotificationSettings(@Field("api_token") api_token: String,
                                    @Field("governorates[]") governorates: List<Int>,
-                                   @Field("blood_types[]") blood_types: List<Int>): Call<NotificationSettings>
+                                   @Field("blood_types[]") blood_types: List<Int>): Observable<NotificationSettings>
 
     @POST("signup-token")
     @FormUrlEncoded
     fun registerNotificationToken(@Field("token") token: String,
                                   @Field("api_token") api_token: String,
-                                  @Field("type") type: String): Call<GeneralResponse>
+                                  @Field("type") type: String): Observable<GeneralResponse>
 
     @POST("remove-token")
     @FormUrlEncoded
     fun removeNotificationToken(@Field("token") token: String,
-                                @Field("api_token") api_token: String): Call<GeneralResponse>
+                                @Field("api_token") api_token: String): Observable<GeneralResponse>
 
     @POST("remove-token")
     @FormUrlEncoded
     fun contactUs(@Field("api_token") api_token: String,
                   @Field("title") title: String,
-                  @Field("message") message: String): Call<ContactUs>
+                  @Field("message") message: String): Observable<ContactUs>
 
     @POST("profile")
     @FormUrlEncoded
@@ -140,5 +140,5 @@ interface ApiServices {
                         @Field("password") password: String,
                         @Field("password_confirmation") password_confirmation: String,
                         @Field("blood_type_id") blood_type_id: Int,
-                        @Field("api_token") api_token: String): Call<Login>
+                        @Field("api_token") api_token: String): Observable<Login>
 }

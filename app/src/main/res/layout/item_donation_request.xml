@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,8 +9,7 @@
             type="com.example.bloodbank.data.model.donations.DonationData" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -92,8 +92,11 @@
                             <TextView
                                 style="@style/donation_tv"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/patient_name" />
+                                android:layout_height="match_parent"
+                                android:text="@string/patient_name"
+                                android:textColor="@color/black_text"
+                                android:textSize="@dimen/item_donation_tv_s_size"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/item_donation_tv_name"
@@ -101,7 +104,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:text="@{donation.client.name}" />
+                                android:maxLines="1"
+                                android:text="@{donation.client.name}"
+                                android:textColor="@color/gray_text"
+                                android:textSize="@dimen/item_donation_tv_s_size" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -120,7 +126,10 @@
                                 style="@style/donation_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/hospital" />
+                                android:text="@string/hospital"
+                                android:textColor="@color/black_text"
+                                android:textSize="@dimen/item_donation_tv_s_size"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/item_donation_tv_hospital"
@@ -128,7 +137,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:text="@{donation.hospitalName}" />
+                                android:maxLines="1"
+                                android:text="@{donation.hospitalName}"
+                                android:textColor="@color/gray_text"
+                                android:textSize="@dimen/item_donation_tv_s_size" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -148,7 +160,10 @@
                                 style="@style/donation_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/city_" />
+                                android:text="@string/city_"
+                                android:textColor="@color/black_text"
+                                android:textSize="@dimen/item_donation_tv_s_size"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/item_donation_tv_city"
@@ -156,7 +171,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
-                                android:text="@{donation.city.name}" />
+                                android:maxLines="1"
+                                android:text="@{donation.city.name}"
+                                android:textColor="@color/gray_text"
+                                android:textSize="@dimen/item_donation_tv_s_size" />
                         </LinearLayout>
 
                         <LinearLayout

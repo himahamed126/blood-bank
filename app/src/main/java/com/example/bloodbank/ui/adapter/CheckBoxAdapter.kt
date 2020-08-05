@@ -7,8 +7,11 @@ import com.example.bloodbank.data.model.general.GeneralData
 import com.example.bloodbank.databinding.ItemCheckBoxBinding
 import com.example.bloodbank.extensions.inflateWithBinding
 
-class CheckBoxAdapter(private val generalDataList: MutableList<GeneralData>, private val oldList: MutableList<String>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CheckBoxAdapter(
+        private val generalDataList: MutableList<GeneralData>,
+        private val oldList: MutableList<String>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     var newIds: MutableList<Int> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckBoxViewHolder {
