@@ -65,7 +65,9 @@
     <string name="message_text">نص الرسالة</string>
     <string name="save">حفظ</string>
     <string name="governorates">المحافظات</string>
-    <string name="log_out_answer">هل تود الخروج</string>
+    <string name="log_out_answer">تسجيل الخروج ؟</string>
     <string name="cover">cover</string>
     <string name="blood_type_ex">A+</string>
+    <string name="confirm">تأكيد</string>
+    <string name="no">لا</string>
 </resources>
